@@ -27,6 +27,7 @@ import { useEffect, useContext, useState } from "react";
 import { ProtectedRoute } from "../HOC/withAuth";
 
 export default function ReportHistoryAdmin() {
+  const { colorMode } = useColorMode();
   const gridResponsive = [
     "repeat(1, 1fr)",
     "repeat(1, 1fr)",
@@ -132,17 +133,29 @@ export default function ReportHistoryAdmin() {
           background={
             (parsedId === 1 && statusUsed === 1) ||
             (parsedId === 6 && statusUsed === 6)
-              ? "green.100"
+              ? colorMode === "dark"
+                ? "green.700"
+                : "green.100"
               : (parsedId === 2 && statusUsed === 2) ||
                 (parsedId === 7 && statusUsed === 7)
-              ? "red.100"
+              ? colorMode === "dark"
+                ? "red.700"
+                : "red.100"
               : parsedId === 3 && statusUsed === 3
-              ? "blue.100"
+              ? colorMode === "dark"
+                ? "blue.700"
+                : "blue.100"
               : (parsedId === 4 && statusUsed === 4) ||
                 (parsedId === 5 && statusUsed === 5)
-              ? "yellow.100"
+              ? colorMode === "dark"
+                ? "yellow.700"
+                : "yellow.100"
               : parsedId === 999 && statusUsed === 999
-              ? "orange.100"
+              ? colorMode === "dark"
+                ? "orange.700"
+                : "orange.100"
+              : colorMode === "dark"
+              ? "gray.700"
               : "gray.50"
           }
           onClick={() => setStatusUsed(parsedId)}
@@ -162,7 +175,7 @@ export default function ReportHistoryAdmin() {
                 ? "yellow"
                 : parsedId === 999 && statusUsed === 999
                 ? "orange"
-                : "gray"
+                : "white"
             }
             isFullWidth
             variant="ghost"
@@ -186,20 +199,32 @@ export default function ReportHistoryAdmin() {
         <Box
           background={
             parseInt(categoryUsed) === parseInt(res.id)
-              ? "orange.100"
+              ? colorMode === "dark"
+                ? "orange.500"
+                : "orange.100"
+              : colorMode === "dark"
+              ? "gray.700"
               : "gray.50"
           }
           _hover={{
             background:
               parseInt(categoryUsed) === parseInt(res.id)
-                ? "orange.300"
+                ? colorMode === "dark"
+                  ? "orange.300"
+                  : "orange.200"
+                : colorMode === "dark"
+                ? "gray.600"
                 : "gray.100",
           }}
           fontWeight="semibold"
           color={
             parseInt(categoryUsed) === parseInt(res.id)
-              ? "orange.500"
-              : "gray.900"
+              ? colorMode === "dark"
+                ? "orange.100"
+                : "orange.700"
+              : colorMode === "dark"
+              ? "gray.100"
+              : "gray.700"
           }
           w="100%"
           py="1"
@@ -493,23 +518,35 @@ export default function ReportHistoryAdmin() {
                           <Box
                             background={
                               parseInt(categoryUsed) === parseInt(999)
-                                ? "orange.100"
+                                ? colorMode === "dark"
+                                  ? "orange.500"
+                                  : "orange.100"
+                                : colorMode === "dark"
+                                ? "gray.700"
                                 : "gray.50"
                             }
-                            fontWeight="semibold"
-                            color={
-                              parseInt(categoryUsed) === parseInt(999)
-                                ? "orange.500"
-                                : "gray.900"
-                            }
-                            w="100%"
-                            py="1"
                             _hover={{
                               background:
                                 parseInt(categoryUsed) === parseInt(999)
-                                  ? "orange.300"
+                                  ? colorMode === "dark"
+                                    ? "orange.300"
+                                    : "orange.200"
+                                  : colorMode === "dark"
+                                  ? "gray.600"
                                   : "gray.100",
                             }}
+                            fontWeight="semibold"
+                            color={
+                              parseInt(categoryUsed) === parseInt(999)
+                                ? colorMode === "dark"
+                                  ? "orange.100"
+                                  : "orange.700"
+                                : colorMode === "dark"
+                                ? "gray.100"
+                                : "gray.700"
+                            }
+                            w="100%"
+                            py="1"
                           >
                             Semua
                           </Box>

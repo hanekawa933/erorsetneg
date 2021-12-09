@@ -2,6 +2,7 @@ import { Box, useColorMode, Text } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 
 const StepProgress = ({ index, stepNumber, status_id }) => {
+  const { colorMode } = useColorMode();
   const iconStatus =
     status_id === 2
       ? "bx:bx-duplicate"
@@ -18,25 +19,37 @@ const StepProgress = ({ index, stepNumber, status_id }) => {
   ];
 
   const boxColorStatus =
-    status_id === 2 || status_id === 7 ? "red.200" : "blue.200";
+    status_id === 2 || status_id === 7
+      ? colorMode === "dark"
+        ? "red.800"
+        : "red.400"
+      : colorMode === "dark"
+      ? "blue.800"
+      : "blue.400";
 
   const boxColor = [
-    "green.200",
+    colorMode === "dark" ? "green.800" : "green.400",
     boxColorStatus,
-    "yellow.200",
-    "yellow.200",
-    "green.200",
+    colorMode === "dark" ? "yellow.600" : "yellow.400",
+    colorMode === "dark" ? "yellow.600" : "yellow.400",
+    colorMode === "dark" ? "green.800" : "green.400",
   ];
 
   const circleColorStatus =
-    status_id === 2 || status_id === 7 ? "red.800" : "blue.800";
+    status_id === 2 || status_id === 7
+      ? colorMode === "dark"
+        ? "red.400"
+        : "red.800"
+      : colorMode === "dark"
+      ? "blue.400"
+      : "blue.800";
 
   const circleColor = [
-    "green.800",
+    colorMode === "dark" ? "green.400" : "green.800",
     circleColorStatus,
-    "yellow.800",
-    "yellow.800",
-    "green.800",
+    colorMode === "dark" ? "yellow.400" : "yellow.800",
+    colorMode === "dark" ? "yellow.400" : "yellow.800",
+    colorMode === "dark" ? "green.400" : "green.800",
   ];
 
   const validationStatus =

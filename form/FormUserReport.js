@@ -19,33 +19,6 @@ const FormUserReport = ({ id }) => {
   const toast = useToast();
   const [preview, setPreview] = useState([]);
 
-  function checkIfFilesAreTooBig(gambar) {
-    let valid = true;
-    if (gambar) {
-      gambar.map((file) => {
-        const size = file.size / 1024 / 1024;
-        if (size > 10) {
-          valid = false;
-        }
-      });
-    }
-    return valid;
-  }
-
-  function checkIfFilesAreCorrectType(gambar) {
-    let valid = true;
-    if (gambar) {
-      gambar.map((file) => {
-        if (
-          !["application/pdf", "image/jpeg", "image/png"].includes(file.type)
-        ) {
-          valid = false;
-        }
-      });
-    }
-    return valid;
-  }
-
   const Schema = Yup.object().shape({
     jenis_kerusakan: Yup.string().required("Input tidak boleh kosong"),
     lokasi: Yup.string().required("Input tidak boleh kosong"),
@@ -98,7 +71,7 @@ const FormUserReport = ({ id }) => {
       kategori_id: id,
     },
     validationSchema: Schema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
       const formData = new FormData();
       formData.append("jenis_kerusakan", values.jenis_kerusakan);
       formData.append("lokasi", values.lokasi);
@@ -107,9 +80,8 @@ const FormUserReport = ({ id }) => {
         formData.append("gambar[]", values.gambar[i]);
       }
       formData.append("kategori_id", values.kategori_id);
-      createReport(formData);
+      await createReport(formData);
       resetForm({});
-      setSubmitting(false);
       handleReset();
       setPreview([]);
     },
@@ -221,12 +193,9 @@ const FormUserReport = ({ id }) => {
             ></Box>
             <Grid templateColumns="repeat(3,1fr)" gap={6} mt="3">
               {(preview || []).map((url, index) => (
-                <Image
-                  src={url}
-                  alt="..."
-                  key={index}
-                  style={{ height: "200px", width: "200px" }}
-                />
+                <Box key={index} height="80">
+                  <Image src={url} alt="..." width="100%" height="100%" />
+                </Box>
               ))}
             </Grid>
           </Box>

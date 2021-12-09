@@ -15,6 +15,7 @@ import {
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import NavSection from "./NavSection";
+import path from "../../constant.default";
 
 const DashboardSidebar = () => {
   const { colorMode } = useColorMode();
@@ -165,7 +166,14 @@ const DashboardSidebar = () => {
         _groupHover={{ boxShadow: "xl", mx: "3", my: "7", py: "4" }}
         background={colorMode === "dark" ? "gray.900" : "gray.50"}
       >
-        <Avatar size="md" name="Avatar" src="/assets/img/photo_profile.png" />
+        <Avatar
+          size="md"
+          name={settings.userLogin.nama_lengkap}
+          background={colorMode === "dark" ? "white" : "orange"}
+          color={colorMode === "dark" ? "black" : "white"}
+          border={`2px solid ${colorMode === "dark" ? "white" : "black"}`}
+          src={path + settings.userLogin.foto_profile}
+        />
         <Box
           mx="3"
           display={[
