@@ -257,7 +257,11 @@ const UserHomepage = () => {
                   fontWeight="semibold"
                   textAlign={alignResponsive}
                 >
-                  Punya keluhan? Laporin langsung yuk!
+                  {parseInt(userLogin.role_id) === 1
+                    ? "Punya keluhan? Laporin langsung yuk!"
+                    : parseInt(userLogin.role_id) === 2
+                    ? "Periksa laporan masuk yuk!"
+                    : "Cek laporan masuk yuk!"}
                 </Text>
               </Box>
               <Box
