@@ -19,6 +19,7 @@ import instance from "../axios.default";
 import { useEffect, useState, useContext } from "react";
 import { TempContext } from "../context/TempContext";
 import { FormChangeProfileUser, FormChangePassword } from "../form";
+import { ProtectedRoute } from "../HOC/withAuth";
 
 const ProfileApp = () => {
   const [userLogin, setUserLogin] = useState([]);
@@ -110,4 +111,4 @@ const ProfileApp = () => {
   );
 };
 
-export default ProfileApp;
+export default ProtectedRoute(ProfileApp);
