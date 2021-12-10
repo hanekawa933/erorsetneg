@@ -12,7 +12,7 @@ import {
 import { FormForgotPassword, FormInputOtp, FormResetPassword } from "../form";
 import { useRouter } from "next/router";
 
-export default function Login() {
+export default function Forgot() {
   const router = useRouter();
   const { email, otp } = router.query;
   return (
@@ -24,7 +24,7 @@ export default function Login() {
       </Head>
       <Container
         maxWidth="100%"
-        height="100vh"
+        p="5"
         display="flex"
         justifyContent="center"
         alignItems="center"

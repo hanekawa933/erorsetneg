@@ -7,8 +7,9 @@ import instance from "../../../axios.default";
 import "moment/locale/id";
 import UserCreatePage from "../../../components/UserCreatePage";
 import ValidatorPage from "../../../components/ValidatorPage";
+import { ProtectedRoute } from "../../../HOC/withAuth";
 
-export default function CreateUserReport() {
+function Reports() {
   const [userLogin, setUserLogin] = useState([]);
   const [settings, setSettings] = useContext(TempContext);
 
@@ -18,7 +19,7 @@ export default function CreateUserReport() {
       setUserLogin(result.data.data);
       setSettings({ ...settings, userLogin: result.data.data });
     } catch (error) {
-      alert(error);
+      router.push("/login");
     }
   };
 
@@ -43,3 +44,5 @@ export default function CreateUserReport() {
     </div>
   );
 }
+
+export default ProtectedRoute(Reports);

@@ -8,7 +8,7 @@ import { ProtectedRoute } from "../HOC/withAuth";
 import { TempContext } from "../context/TempContext";
 import instance from "../axios.default";
 
-export default function CategoryList() {
+function CategoryList() {
   const gridResponsive = [
     "repeat(3, 1fr)",
     "repeat(1, 1fr)",
@@ -27,7 +27,7 @@ export default function CategoryList() {
       setUserLogin(result.data.data);
       setSettings({ ...settings, userLogin: result.data.data });
     } catch (error) {
-      alert(error);
+      router.push("/login");
     }
   };
 
@@ -92,3 +92,5 @@ export default function CategoryList() {
     </div>
   );
 }
+
+export default ProtectedRoute(CategoryList);

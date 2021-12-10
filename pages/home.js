@@ -76,8 +76,7 @@ const UserHomepage = () => {
       setSettings({ ...settings, userLogin: result.data.data });
       setLoadingUser(true);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      router.push("/login");
     }
   };
 

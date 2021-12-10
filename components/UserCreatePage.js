@@ -18,7 +18,7 @@ export default function UserCreatePage() {
       const result = await instance.get("/user/profile");
       setSettings({ ...settings, userLogin: result.data.data });
     } catch (error) {
-      alert(error);
+      router.push("/login");
     }
   };
 
@@ -27,8 +27,11 @@ export default function UserCreatePage() {
       const result = await instance.get(`/kategori/item/id/${id}`);
       setCategory(result.data.data);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      if (parseInt(error.response.status) === 404) {
+        router.push("/404");
+      } else {
+        router.push("/500");
+      }
     }
   };
 

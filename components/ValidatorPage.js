@@ -34,8 +34,7 @@ function ValidatorPage() {
       setSettings({ ...settings, userLogin: result.data.data });
       setLoading(true);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      router.push("/login");
     }
   };
 
@@ -46,8 +45,7 @@ function ValidatorPage() {
       );
       setReport(result.data.data ? result.data.data : []);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      router.push("/404");
     }
   };
 
@@ -60,8 +58,7 @@ function ValidatorPage() {
       const result = await instance.get(`/kategori/item/id/${id}`);
       setCategory(result.data.data ? result.data.data : []);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      router.push("/404");
     }
   };
 

@@ -26,7 +26,7 @@ import instance from "../axios.default";
 import { useEffect, useContext, useState } from "react";
 import { ProtectedRoute } from "../HOC/withAuth";
 
-export default function ReportHistoryAdmin() {
+function History() {
   const { colorMode } = useColorMode();
   const gridResponsive = [
     "repeat(1, 1fr)",
@@ -56,8 +56,7 @@ export default function ReportHistoryAdmin() {
       setSettings({ ...settings, userLogin: result.data.data });
       setLoadingUser(true);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      router.push("/login");
     }
   };
 
@@ -599,3 +598,5 @@ export default function ReportHistoryAdmin() {
     </div>
   );
 }
+
+export default ProtectedRoute(History);

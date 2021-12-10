@@ -16,13 +16,11 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import CardHistoryReport from "../components/CardHistoryReport";
 import { TempContext } from "../context/TempContext";
 import instance from "../axios.default";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
-const UserHomepage = () => {
+const Faq = () => {
   const { colorMode } = useColorMode();
 
   const headingResponsive = ["1em", "1em", "1.3em", "1.3em", "1.3em", "1.6em"];
@@ -76,8 +74,7 @@ const UserHomepage = () => {
       setUserLogin(result.data.data);
       setSettings({ ...settings, userLogin: result.data.data });
     } catch (error) {
-      alert(error);
-      console.log(error);
+      router.push("/login");
     }
   };
 
@@ -213,4 +210,4 @@ const UserHomepage = () => {
   );
 };
 
-export default ProtectedRoute(UserHomepage);
+export default ProtectedRoute(Faq);

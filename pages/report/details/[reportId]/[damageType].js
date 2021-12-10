@@ -16,6 +16,7 @@ import {
   Text,
   Image,
   Button,
+  Avatar,
 } from "@chakra-ui/react";
 import { TempContext } from "../../../../context/TempContext";
 import instance from "../../../../axios.default";
@@ -29,7 +30,8 @@ import { FormAdminReport } from "../../../../form";
 import { DownloadIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 
-export default function CategoryList() {
+function DetailsReport() {
+  const { colorMode } = useColorMode();
   const gridResponsive2 = [
     "repeat(1, 1fr)",
     "repeat(1, 1fr)",
@@ -53,7 +55,7 @@ export default function CategoryList() {
       console.log(result.data.data);
       setSettings({ ...settings, userLogin: result.data.data });
     } catch (error) {
-      alert(error);
+      router.push("/login");
     }
   };
 
@@ -244,6 +246,52 @@ export default function CategoryList() {
                 </Box>
               </Box>
 
+              <Box display="flex" flexDir="column" my="5">
+                <Box
+                  as="span"
+                  fontWeight="bold"
+                  textTransform="capitalize"
+                  fontSize={["1em", "1.2em", "1.4em"]}
+                >
+                  Dilaporkan oleh
+                </Box>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  mt="5"
+                  borderRadius="lg"
+                  boxShadow="lg"
+                  width="max-content"
+                  p="5"
+                >
+                  <Avatar
+                    src={path + report.foto_profile}
+                    name={report.nama_lengkap}
+                    size="2xl"
+                  />
+                  <Box mx="10">
+                    <Box
+                      as="p"
+                      textAlign="justify"
+                      fontWeight="semibold"
+                      color={colorMode === "dark" ? "gray.300" : "gray.800"}
+                      fontSize={["1em", "1em", "1.2em"]}
+                    >
+                      {report.nama_lengkap}
+                    </Box>
+                    <Box
+                      as="p"
+                      textAlign="justify"
+                      fontWeight="semibold"
+                      color="gray.500"
+                      fontSize={["1em", "1em", "1.2em"]}
+                    >
+                      {report.jabatan}
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+
               {parseInt(userLogin.role_id) === 1 ? (
                 <Box py="5">
                   <Box
@@ -384,3 +432,5 @@ export default function CategoryList() {
     </div>
   );
 }
+
+export default ProtectedRoute(DetailsReport);

@@ -63,7 +63,7 @@ const DashboardNavbar = () => {
           width="100%"
         >
           <Link
-            href={`/report/${res.lId}/${res.jenis_kerusakan}`}
+            href={`/report/details/${res.lId}/${res.jenis_kerusakan}`}
             _hover={{ textDecor: "none" }}
           >
             <Box display="flex" alignItems="center" p="5">
