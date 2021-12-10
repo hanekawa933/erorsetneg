@@ -120,9 +120,38 @@ function History() {
 
   status = [{ id: "999", nama: "Semua" }, ...status];
 
-  const listOfButton =
+  const adminStatus =
     status &&
-    status.map((res) => {
+    status.filter(
+      (res) =>
+        parseInt(res.id) === 2 ||
+        parseInt(res.id) === 3 ||
+        parseInt(res.id) === 6 ||
+        parseInt(res.id) === 7 ||
+        parseInt(res.id) === 999
+    );
+
+  const techStatus =
+    status &&
+    status.filter(
+      (res) =>
+        parseInt(res.id) === 4 ||
+        parseInt(res.id) === 5 ||
+        parseInt(res.id) === 6 ||
+        parseInt(res.id) === 7 ||
+        parseInt(res.id) === 999
+    );
+
+  const roleStatus =
+    parseInt(userLogin.role_id) === 2
+      ? adminStatus
+      : parseInt(userLogin.role_id) === 3
+      ? techStatus
+      : status;
+
+  const listOfButton =
+    roleStatus &&
+    roleStatus.map((res) => {
       const parsedId = parseInt(res.id);
       return (
         <MenuItem
