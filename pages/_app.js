@@ -2,6 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import setAuthToken from "../middlewares/setAuthToken";
 import { TempProvider } from "../context/TempContext";
 import Cookies from "js-cookie";
+import "../styles/globals.css";
 
 if (typeof window !== "undefined") {
   if (Cookies.get("token")) {

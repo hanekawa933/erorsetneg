@@ -23,7 +23,7 @@ export default function Login() {
 
   if (load) {
     setTimeout(() => {
-      setLoad(false);
+      setLoad(true);
     }, 4500);
 
     return <Loading />;

@@ -8,18 +8,15 @@ function Loading() {
 
   return (
     <Box
-      position="relative"
-      top="50%"
-      left="50%"
-      transform="translate(-50%, 90%)"
+      background="blackAlpha.700"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      height="100%"
+      width="100%"
+      flexDir="column"
     >
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        height="100%"
-        px={["10", "0"]}
-      >
+      <Box display="flex" alignItems="center" px={["10", "0"]}>
         <Box width="14" height="14">
           <Image src="/assets/img/EROR.png" alt="EROR LOGO" width="100%" />
         </Box>
@@ -41,7 +38,7 @@ function Loading() {
           </Box>
         </Box>
       </Box>
-      <Box mt="5" height="100%">
+      <Box mt="5">
         <Box textAlign="center" fontWeight="semibold">
           Dipersembahkan oleh:
         </Box>
@@ -66,12 +63,7 @@ function Loading() {
             width={[32, 48]}
           />
         </Box>
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="100%"
-        >
+        <Box display="flex" justifyContent="center" alignItems="center">
           <Loader
             type="ThreeDots"
             color="#FFD202"
