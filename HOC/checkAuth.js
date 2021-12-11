@@ -6,8 +6,8 @@ export const ProtectedRoute = (WrapperComponent) => {
   return class extends React.Component {
     static async getInitialProps(ctx) {
       const token = cookies(ctx)["token"];
-      if (!token) {
-        const route = "/";
+      if (token) {
+        const route = "/home";
 
         if (ctx.res) {
           ctx.res.writeHead(302, { location: route });

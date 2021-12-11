@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { ProtectedRoute } from "../HOC/checkAuth";
 
 import {
   Box,
@@ -12,7 +13,7 @@ import {
 import { FormForgotPassword, FormInputOtp, FormResetPassword } from "../form";
 import { useRouter } from "next/router";
 
-export default function Forgot() {
+function Forgot() {
   const router = useRouter();
   const { email, otp } = router.query;
   return (
@@ -163,3 +164,5 @@ export default function Forgot() {
     </div>
   );
 }
+
+export default ProtectedRoute(Forgot);

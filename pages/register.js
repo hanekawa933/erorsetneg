@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { ProtectedRoute } from "../HOC/checkAuth";
 
 import {
   Box,
@@ -14,7 +15,7 @@ import {
 import AuthRegister from "../components/Auth/AuthRegister";
 import Link from "next/link";
 
-export default function Login() {
+function Register() {
   return (
     <div>
       <Head>
@@ -134,3 +135,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default ProtectedRoute(Register);

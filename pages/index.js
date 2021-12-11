@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-
+import { ProtectedRoute } from "../HOC/checkAuth";
 import {
   Box,
   Container,
@@ -17,7 +17,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 
-export default function Login() {
+function Login() {
   const { colorMode } = useColorMode();
   const [load, setLoad] = useState(true);
 
@@ -155,3 +155,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default ProtectedRoute(Login);
