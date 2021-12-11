@@ -1,6 +1,6 @@
 import Head from "next/head";
 import DashboardLayout from "../../../layouts/dashboard";
-import { Box, Text, useColorMode } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { TempContext } from "../../../context/TempContext";
 import instance from "../../../axios.default";

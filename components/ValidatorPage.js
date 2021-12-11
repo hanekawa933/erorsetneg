@@ -6,6 +6,9 @@ import {
   Text,
   Button,
   Skeleton,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import { TempContext } from "../context/TempContext";
@@ -15,6 +18,7 @@ import { ProtectedRoute } from "../HOC/withAuth";
 
 import { useRouter } from "next/router";
 import path from "../constant.default";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 function ValidatorPage() {
   const [userLogin, setUserLogin] = useState([]);
@@ -131,6 +135,27 @@ function ValidatorPage() {
 
   return (
     <Box>
+      <Breadcrumb
+        spacing="8px"
+        separator={<ChevronRightIcon />}
+        fontSize="lg"
+        px={["3", "3", "4"]}
+        pb={["3", "3", "4"]}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Beranda</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/category">Laporan</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#" isCurrentPage>
+            {category.nama}
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Skeleton isLoaded={loading}>
         <Box
           display="flex"

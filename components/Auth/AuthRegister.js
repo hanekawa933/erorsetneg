@@ -56,7 +56,7 @@ const AuthRegister = () => {
         position: "top",
       });
 
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       toast({
         title: "Pendaftaran Gagal",

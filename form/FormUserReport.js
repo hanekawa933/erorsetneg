@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import {
   Box,
   FormControl,
@@ -10,12 +10,30 @@ import {
   Grid,
   useToast,
   Image,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useFormik, Form, FormikProvider } from "formik";
+import { TempContext } from "../context/TempContext";
 import instance from "../axios.default";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-const FormUserReport = ({ id }) => {
+const FormUserReport = ({ id, fetchReport }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
+  const [settings, setSettings] = useContext(TempContext);
+  const [user, setUser] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [load, setLoad] = useState(false);
+
   const toast = useToast();
   const [preview, setPreview] = useState([]);
 
@@ -28,6 +46,19 @@ const FormUserReport = ({ id }) => {
     // .required("File tidak boleh kosong")
   });
 
+  const fetchUserLogin = async () => {
+    try {
+      const result = await instance.get("/user/profile");
+      setSettings({ ...settings, userLogin: result.data.data });
+      setUser(result.data.data);
+
+      setLoad(true);
+    } catch (error) {
+      alert("TEST");
+      console.log(error.response);
+    }
+  };
+
   const createReport = async (data) => {
     // const body = JSON.stringify(data);
     const config = {
@@ -37,6 +68,7 @@ const FormUserReport = ({ id }) => {
     };
     try {
       const result = await instance.post("/laporan/user", data, config);
+      fetchReport(1);
       toast({
         title: "Berhasil",
         description: "Laporan berhasil dibuat.",
@@ -55,6 +87,10 @@ const FormUserReport = ({ id }) => {
       });
     }
   };
+
+  useEffect(() => {
+    fetchUserLogin();
+  }, []);
 
   const gambarRef = useRef();
 
@@ -88,6 +124,16 @@ const FormUserReport = ({ id }) => {
     enableReinitialize: true,
   });
 
+  const showToast = () => {
+    toast({
+      title: "Gagal",
+      description: "Profile anda belum lengkap",
+      status: "error",
+      duration: 2000,
+      position: "top",
+    });
+  };
+
   const {
     errors,
     touched,
@@ -97,6 +143,7 @@ const FormUserReport = ({ id }) => {
     handleBlur,
     setFieldValue,
     values,
+    submitForm,
   } = formik;
 
   const InputTypeText = (label) => {
@@ -114,6 +161,9 @@ const FormUserReport = ({ id }) => {
           name={label}
           {...getFieldProps(label)}
           onBlur={handleBlur}
+          isDisabled={
+            !user.jenis_kelamin && !user.no_telp && !user.jabatan ? true : false
+          }
         />
         <FormErrorMessage>{touched[label] && errors[label]}</FormErrorMessage>
       </FormControl>
@@ -143,8 +193,52 @@ const FormUserReport = ({ id }) => {
     }
   };
 
+  const modalAlert = (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Peringatan</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Box textAlign="center" fontWeight="700">
+            Ooops... mohon maaf, profil anda tidak lengkap.
+          </Box>
+          <Box
+            as="object"
+            type="image/svg+xml"
+            data="/assets/svg/locked.svg"
+            maxW="100%"
+            height="96"
+          ></Box>
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="red" mr={3} onClick={onClose}>
+            Tutup
+          </Button>
+          <Link href="/profile" passHref>
+            <Button colorScheme="orange">Lengkapi Data Diri</Button>
+          </Link>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
+
+  if (load) {
+    if (parseInt(user.role_id) === 1) {
+      if (!user.jenis_kelamin || !user.no_telp || !user.jabatan) {
+        if (!open) {
+          onOpen();
+          setOpen(true);
+        }
+      }
+    }
+  }
+
+  console.log(!user.jenis_kelamin);
+
   return (
     <Box mt="5">
+      {modalAlert}
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
           {InputTypeText("jenis_kerusakan")}
@@ -160,6 +254,11 @@ const FormUserReport = ({ id }) => {
               name="keterangan"
               {...getFieldProps("keterangan")}
               onBlur={handleBlur}
+              isDisabled={
+                !user.jenis_kelamin && !user.no_telp && !user.jabatan
+                  ? true
+                  : false
+              }
             />
             <FormErrorMessage>
               {touched.keterangan && errors.keterangan}
@@ -180,6 +279,11 @@ const FormUserReport = ({ id }) => {
               multiple
               ref={gambarRef}
               accept=".png, .jpg, jpeg, .gif, .bmp"
+              isDisabled={
+                !user.jenis_kelamin && !user.no_telp && !user.jabatan
+                  ? true
+                  : false
+              }
             />
             <FormErrorMessage>
               {touched.gambar && errors.gambar}
@@ -201,10 +305,19 @@ const FormUserReport = ({ id }) => {
           </Box>
           <Box display="flex" justifyContent="end">
             <Button
-              type="submit"
               colorScheme="orange"
               isLoading={isSubmitting}
               mt="5"
+              // isDisabled={
+              //   !user.jenis_kelamin && !user.no_telp && !user.jabatan
+              //     ? true
+              //     : false
+              // }
+              onClick={() =>
+                !user.jenis_kelamin && !user.no_telp && !user.jabatan
+                  ? showToast()
+                  : submitForm()
+              }
             >
               Masukan Data
             </Button>

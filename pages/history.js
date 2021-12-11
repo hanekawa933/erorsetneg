@@ -18,8 +18,11 @@ import {
   MenuItem,
   Tag,
   Skeleton,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Icon } from "@iconify/react";
 import { TempContext } from "../context/TempContext";
 import instance from "../axios.default";
@@ -505,6 +508,22 @@ function History() {
       </Head>
       <DashboardLayout>
         <Box px="5" pb="14">
+          <Breadcrumb
+            spacing="8px"
+            separator={<ChevronRightIcon />}
+            fontSize="lg"
+            px={["3", "3", "5"]}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Beranda</BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink href="#" isCurrentPage>
+                Riwayat
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
           <Skeleton
             isLoaded={
               loadingCategory && loadingReport && loadingStatus && loadingUser

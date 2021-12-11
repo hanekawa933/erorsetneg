@@ -23,8 +23,12 @@ import {
   Button,
   Image,
   useToast,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import DashboardLayout from "../layouts/dashboard";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import Head from "next/head";
 import { useFormik, Form, FormikProvider } from "formik";
 import * as Yup from "yup";
@@ -155,6 +159,23 @@ const ProfileApp = () => {
       <DashboardLayout>
         {modalUpdateProfile}
         <Box px={["2", "6"]} pb="10">
+          <Breadcrumb
+            spacing="8px"
+            separator={<ChevronRightIcon />}
+            fontSize="lg"
+            px={["3", "3", "5"]}
+            pb={["3", "3", "5"]}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Beranda</BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink href="#" isCurrentPage>
+                Profil
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
           <Box>
             <Skeleton isLoaded={loading}>
               <Box

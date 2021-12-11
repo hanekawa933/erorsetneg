@@ -17,6 +17,9 @@ import {
   Image,
   Button,
   Avatar,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import { TempContext } from "../../../../context/TempContext";
 import instance from "../../../../axios.default";
@@ -29,6 +32,7 @@ import path from "../../../../constant.default";
 import { FormAdminReport } from "../../../../form";
 import { DownloadIcon } from "@chakra-ui/icons";
 import Link from "next/link";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 function DetailsReport() {
   const { colorMode } = useColorMode();
@@ -139,6 +143,33 @@ function DetailsReport() {
       </Head>
       <DashboardLayout>
         <Box px="5" pb="14">
+          <Breadcrumb
+            spacing="8px"
+            separator={<ChevronRightIcon />}
+            fontSize="lg"
+            px={["3", "3", "4"]}
+            pb={["3", "3", "4"]}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Beranda</BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/category">Laporan</BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink href={`/report/${report.kId}/${report.kategori}`}>
+                {report.kategori}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink href="#" isCurrentPage>
+                {report.jenis_kerusakan}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
           <Box>
             <Box width="100%" borderRadius="lg">
               <Carousel
@@ -172,7 +203,7 @@ function DetailsReport() {
                 </Link>
               </Box>
             ) : null}
-            <Box px="5" pb="10">
+            <Box pb="10">
               <Box display="flex" justifyContent="space-between">
                 <Box display="flex" flexDir="column" width="max-content" py="5">
                   <Text fontSize="1em" fontWeight="bold" color="gray.600">
@@ -246,7 +277,14 @@ function DetailsReport() {
                 </Box>
               </Box>
 
-              <Box display="flex" flexDir="column" my="5">
+              <Box
+                display="flex"
+                justifyContent={["center", "start"]}
+                alignItems={["center", "start"]}
+                flexDir="column"
+                my="5"
+                mx={["5", "0"]}
+              >
                 <Box
                   as="span"
                   fontWeight="bold"

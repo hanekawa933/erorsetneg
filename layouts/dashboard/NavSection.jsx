@@ -127,7 +127,7 @@ const NavSection = () => {
 
   const logout = () => {
     Cookie.remove("token");
-    router.push("/login");
+    router.push("/");
   };
 
   const logoutLink = (

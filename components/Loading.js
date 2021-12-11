@@ -12,13 +12,14 @@ function Loading() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box
-        background="blackAlpha.700"
+        background="gray.800"
         display="flex"
         alignItems="center"
         justifyContent="center"
         height="100%"
         width="100%"
         flexDir="column"
+        color="white"
       >
         <Box display="flex" alignItems="center" px={["10", "0"]}>
           <Box width="14" height="14">
@@ -50,9 +51,12 @@ function Loading() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            px="3"
+            px="10"
             pb="3"
             borderRadius="lg"
+            background="gray.900"
+            boxShadow="lg"
+            mt="5"
           >
             <Image
               src="/assets/img/setneg.png"

@@ -1,14 +1,34 @@
 import { FormUserReport } from "../form";
-import { Box, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  useColorMode,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useDisclosure,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { TempContext } from "../context/TempContext";
 import instance from "../axios.default";
 import { useRouter } from "next/router";
 import path from "../constant.default";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 
 export default function UserCreatePage() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [category, setCategory] = useState([]);
   const [settings, setSettings] = useContext(TempContext);
+  const [change, setChange] = useState(0);
 
   const router = useRouter();
   const { id } = router.query;
@@ -18,7 +38,7 @@ export default function UserCreatePage() {
       const result = await instance.get("/user/profile");
       setSettings({ ...settings, userLogin: result.data.data });
     } catch (error) {
-      router.push("/login");
+      router.push("/");
     }
   };
 
@@ -41,10 +61,31 @@ export default function UserCreatePage() {
     }
     fetchUserLogin();
     fetchCategoryById(id);
-  }, [id]);
+  }, [id, change]);
 
   return (
     <Box p="4">
+      <Breadcrumb
+        spacing="8px"
+        separator={<ChevronRightIcon />}
+        fontSize="lg"
+        px={["3", "3", "4"]}
+        pb={["3", "3", "4"]}
+      >
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Beranda</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/category">Laporan</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#" isCurrentPage>
+            {category.nama}
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <Box
         display="flex"
         alignItems="center"
@@ -83,7 +124,10 @@ export default function UserCreatePage() {
         ></Box>
       </Box>
       <Box>
-        <FormUserReport id={id} />
+        <FormUserReport
+          id={id}
+          fetchReport={!id ? null : () => setChange(change + setChange)}
+        />
       </Box>
     </Box>
   );

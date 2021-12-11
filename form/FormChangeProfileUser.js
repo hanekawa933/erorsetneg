@@ -144,7 +144,7 @@ const FormChangeProfileUser = ({ changed }) => {
                   {...getFieldProps("jenis_kelamin")}
                   onBlur={handleBlur}
                 >
-                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Laki-Laki">Laki-laki</option>
                   <option value="Perempuan">Perempuan</option>
                 </Select>
                 <FormErrorMessage>

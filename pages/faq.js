@@ -15,8 +15,12 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import { TempContext } from "../context/TempContext";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import instance from "../axios.default";
 import { useRouter } from "next/router";
 
@@ -65,7 +69,6 @@ const Faq = () => {
   const router = useRouter();
   const [userLogin, setUserLogin] = useState([]);
   const [faq, setFaq] = useState([]);
-  const [report, setReport] = useState([]);
   const [settings, setSettings] = useContext(TempContext);
 
   const fetchUserLogin = async () => {
@@ -145,7 +148,6 @@ const Faq = () => {
       </Box>
     );
   });
-  const showReport = report.length < 1 ? notFound : gridReport;
   return (
     <div>
       <Head>
@@ -153,6 +155,23 @@ const Faq = () => {
       </Head>
       <DashboardLayout>
         <Box px={["3", "5"]} pb="7">
+          <Breadcrumb
+            spacing="8px"
+            separator={<ChevronRightIcon />}
+            fontSize="lg"
+            px={["3", "3", "5"]}
+            pb={["3", "3", "5"]}
+          >
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Beranda</BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink href="#" isCurrentPage>
+                Riwayat
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
           <Box
             px={["5%", "10%"]}
             py="5"
