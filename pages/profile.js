@@ -55,7 +55,7 @@ const ProfileApp = () => {
       setSettings({ ...settings, userLogin: result.data.data });
       setLoading(true);
     } catch (error) {
-      router.push("/login");
+      router.push("/");
     }
   };
 

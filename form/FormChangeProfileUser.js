@@ -13,18 +13,19 @@ import { useFormik, Form, FormikProvider } from "formik";
 import * as Yup from "yup";
 import instance from "../axios.default";
 import { useEffect, useState, useContext } from "react";
+import { useRouter } from "mext/router";
 
 const FormChangeProfileUser = ({ changed }) => {
   const toast = useToast();
   const [userLogin, setUserLogin] = useState([]);
-
+  const router = useRouter();
   const fetchUserLogin = async () => {
     try {
       const result = await instance.get("/user/profile");
       setUserLogin(result.data.data);
     } catch (error) {
       alert(error);
-      console.log(error);
+      router.push("/");
     }
   };
 

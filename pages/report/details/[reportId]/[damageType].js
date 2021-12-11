@@ -55,7 +55,7 @@ function DetailsReport() {
       console.log(result.data.data);
       setSettings({ ...settings, userLogin: result.data.data });
     } catch (error) {
-      router.push("/login");
+      router.push("/");
     }
   };
 

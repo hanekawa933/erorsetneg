@@ -124,7 +124,7 @@ export default function Login() {
             <Divider mt="5" mb="5" />
             <Box textAlign="center">
               <Box as="span">Sudah punya akun?</Box>
-              <ChakraLink px="2" color="#E67503" href="/login" fontWeight="700">
+              <ChakraLink px="2" color="#E67503" href="/" fontWeight="700">
                 Masuk
               </ChakraLink>
             </Box>

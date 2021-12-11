@@ -73,7 +73,7 @@ const FormResetPassword = () => {
         position: "top",
       });
 
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       toast({
         title: "Gagal Update",

@@ -115,7 +115,7 @@ const FormForgotPassword = () => {
               >
                 Kirim
               </Button>
-              <Link href="/login">
+              <Link href="/">
                 <a>
                   <Button
                     colorScheme="gray"
