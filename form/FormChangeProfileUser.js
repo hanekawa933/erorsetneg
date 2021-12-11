@@ -13,7 +13,7 @@ import { useFormik, Form, FormikProvider } from "formik";
 import * as Yup from "yup";
 import instance from "../axios.default";
 import { useEffect, useState, useContext } from "react";
-import { useRouter } from "mext/router";
+import { useRouter } from "next/router";
 
 const FormChangeProfileUser = ({ changed }) => {
   const toast = useToast();
