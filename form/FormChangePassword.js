@@ -70,8 +70,7 @@ const FormChangePassword = () => {
     },
     validationSchema: Schema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      updateUserAccount(values);
-      setSubmitting(false);
+      await updateUserAccount(values);
       resetForm({});
     },
     enableReinitialize: true,

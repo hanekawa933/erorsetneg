@@ -516,9 +516,7 @@ function History() {
                   icon="bi:clock-history"
                   width={30}
                   height={30}
-                  color={
-                    useColorMode().colorMode === "dark" ? "white" : "black"
-                  }
+                  color={colorMode === "dark" ? "white" : "black"}
                 />
                 <Box as="span" fontSize={["1em", "1.5em", "2.2em"]} ml="3">
                   Riwayat Laporan

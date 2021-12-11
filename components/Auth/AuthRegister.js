@@ -17,7 +17,7 @@ import * as Yup from "yup";
 import { useFormik, Form, FormikProvider } from "formik";
 import instance from "../../axios.default";
 
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 
 const AuthRegister = () => {
   const toast = useToast();
@@ -56,9 +56,7 @@ const AuthRegister = () => {
         position: "top",
       });
 
-      setTimeout(() => {
-        Router.push("/login");
-      }, 2000);
+      router.push("/login");
     } catch (error) {
       toast({
         title: "Pendaftaran Gagal",
@@ -80,12 +78,9 @@ const AuthRegister = () => {
       password_verify: "",
     },
     validationSchema: Schema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
-      register(values);
-      setTimeout(() => {
-        resetForm({});
-        setSubmitting(false);
-      }, 2000);
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      await register(values);
+      resetForm();
     },
   });
 
@@ -130,7 +125,7 @@ const AuthRegister = () => {
           />
           <FormErrorMessage>{touched.email && errors.email}</FormErrorMessage>
         </FormControl>
-        <Box display="flex" flexDir={["column", "row"]}>
+        <Box display="flex" flexDir={["column", "column", "row"]}>
           <FormControl
             id="password"
             pt="5"
@@ -166,7 +161,7 @@ const AuthRegister = () => {
             isInvalid={Boolean(
               touched.password_verify && errors.password_verify
             )}
-            ml={["0", "3"]}
+            ml={["0", "0", "3"]}
           >
             <FormLabel>Ulangi Password</FormLabel>
             <InputGroup>

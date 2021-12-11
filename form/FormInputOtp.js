@@ -73,8 +73,8 @@ const FormInputOtp = () => {
       kode: "",
     },
     validationSchema: Schema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
-      authResetOtp(values);
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      await authResetOtp(values);
       setSubmitting(false);
     },
     enableReinitialize: true,

@@ -14,8 +14,20 @@ import {
 } from "@chakra-ui/react";
 import AuthLogin from "../components/Auth/AuthLogin";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import Loading from "../components/Loading";
 
 export default function Login() {
+  const { colorMode } = useColorMode();
+  const [load, setLoad] = useState(true);
+
+  if (load) {
+    setTimeout(() => {
+      setLoad(false);
+    }, 4500);
+
+    return <Loading />;
+  }
   return (
     <div>
       <Head>
@@ -25,18 +37,17 @@ export default function Login() {
       </Head>
       <Container
         maxWidth="100%"
-        pt="5"
+        py="8"
         display="flex"
         justifyContent="center"
         alignItems="center"
       >
         <Box
           display="flex"
-          alignItems="center"
           borderRadius="md"
-          boxShadow={["", "", "", "xl"]}
-          h={["100%", "100%", "100%", "2xl"]}
-          w={["100%", "100%", "100%", "75%"]}
+          boxShadow={["none", "none", "none", "xl"]}
+          h="100%"
+          w={["100%", "100%", "100%", "95%", "80%"]}
           position="relative"
         >
           <Box
@@ -106,16 +117,21 @@ export default function Login() {
               </Text>
               <Heading
                 fontSize="1.5em"
-                color={
-                  useColorMode().colorMode === "dark" ? "gray.100" : "gray.900"
-                }
+                color={colorMode === "dark" ? "gray.100" : "gray.900"}
               >
                 Solusi untuk penanganan kerusakan sarana dan prasarana secara
                 elektronik.
               </Heading>
             </Box>
           </Box>
-          <Box w={["100%", "100%", "100%", "50%"]} mx="auto" my="40" p="10">
+          <Box
+            w={["100%", "100%", "100%", "50%"]}
+            px="10"
+            display="flex"
+            flexDir="column"
+            justifyContent="center"
+            my={["20", "20", "20", "0"]}
+          >
             <Heading as="h1" size="lg">
               Selamat datang kembali!
             </Heading>

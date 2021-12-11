@@ -76,13 +76,10 @@ const AuthLogin = () => {
       password: "",
     },
     validationSchema: Schema,
-    onSubmit: (values, { resetForm, setSubmitting, setFieldValue }) => {
-      login(values);
-      setTimeout(() => {
-        resetForm();
-        setFieldValue("email", values.email);
-        setSubmitting(false);
-      }, 2000);
+    onSubmit: async (values, { resetForm, setSubmitting, setFieldValue }) => {
+      await login(values);
+      resetForm();
+      setFieldValue("email", values.email);
     },
   });
 

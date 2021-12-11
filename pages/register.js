@@ -24,18 +24,17 @@ export default function Login() {
       </Head>
       <Container
         maxWidth="100%"
-        height="100vh"
+        py="8"
         display="flex"
         justifyContent="center"
         alignItems="center"
       >
         <Box
           display="flex"
-          alignItems="center"
           borderRadius="md"
-          boxShadow={["", "", "", "xl"]}
-          h={["100%", "100%", "100%", "2xl"]}
-          w={["100%", "100%", "100%", "75%"]}
+          boxShadow={["none", "none", "none", "xl"]}
+          h="100%"
+          w={["100%", "100%", "100%", "95%", "80%"]}
           position="relative"
         >
           <Box
@@ -109,7 +108,14 @@ export default function Login() {
               </Heading>
             </Box>
           </Box>
-          <Box w={["100%", "100%", "100%", "50%"]} mx="auto" my="40" p="10">
+          <Box
+            w={["100%", "100%", "100%", "50%"]}
+            px="10"
+            display="flex"
+            flexDir="column"
+            justifyContent="center"
+            my={["20", "20", "20", "0"]}
+          >
             <Heading as="h1" size="lg">
               Hello, daftar dulu yuk!
             </Heading>

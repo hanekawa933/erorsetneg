@@ -325,6 +325,7 @@ function DetailsReport() {
                     display="flex"
                     flexDir="column"
                     mt="3"
+                    mx="5"
                     width={["100%", "100%", "50%"]}
                   >
                     <Box

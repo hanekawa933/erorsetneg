@@ -96,8 +96,7 @@ const FormResetPassword = () => {
     },
     validationSchema: Schema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
-      resetUserPassword(values);
-      setSubmitting(false);
+      await resetUserPassword(values);
       resetForm({});
     },
     enableReinitialize: true,

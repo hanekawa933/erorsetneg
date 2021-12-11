@@ -63,13 +63,9 @@ const FormForgotPassword = () => {
       email: "",
     },
     validationSchema: Schema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
-      forgotPassword(values);
-
-      setTimeout(() => {
-        setSubmitting(false);
-        resetForm({});
-      }, 5000);
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      await forgotPassword(values);
+      resetForm();
     },
     enableReinitialize: true,
   });

@@ -211,6 +211,7 @@ const UserHomepage = () => {
     </Grid>
   );
   const showReport = report.length < 1 ? notFound : gridReport;
+
   return (
     <div>
       <Head>

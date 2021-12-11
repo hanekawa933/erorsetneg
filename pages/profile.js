@@ -179,8 +179,8 @@ const ProfileApp = () => {
                   />
                   <Box
                     position="absolute"
-                    ml="20"
-                    mt="24"
+                    // ml="20"
+                    // mt="24"
                     background={colorMode === "dark" ? "gray.50" : "gray.700"}
                     borderRadius="full"
                     p="1"
@@ -188,6 +188,8 @@ const ProfileApp = () => {
                     onClick={() => {
                       document.querySelector("#foto_profile").click();
                     }}
+                    top="100%"
+                    transform="translate(40px,20px)"
                   >
                     <Icon
                       icon="ic:baseline-add-a-photo"
