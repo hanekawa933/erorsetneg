@@ -94,9 +94,10 @@ export const TahapSetelahPengecekan = ({ id, fetchReport }) => {
   const router = useRouter();
   const [reject, setReject] = useState(false);
   const [preview, setPreview] = useState([]);
+  const [status, setStatus] = useState();
 
   const SchemaAccepted = Yup.object().shape({
-    ket_teknisi: Yup.array().nullable(),
+    ket_teknisi: Yup.string().required("Input tidak boleh kosong"),
   });
 
   const SchemaRejected = Yup.object().shape({
@@ -182,8 +183,18 @@ export const TahapSetelahPengecekan = ({ id, fetchReport }) => {
   const formik = useFormik({
     initialValues: initValues,
     validationSchema: Schema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
-      setSubmitting(false);
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      const formData = new FormData();
+      if (reject) {
+        const formData = new FormData();
+        formData.append("ket_teknisi", values.ket_teknisi);
+        for (let i = 0; i < values.gambar.length; i++) {
+          formData.append("gambar[]", values.gambar[i]);
+        }
+      }
+
+      const stats = parseInt(status);
+      stats === 5 && !reject ? await fixTech(values) : await btaTech(formData);
       resetForm({});
       setPreview([]);
     },
@@ -319,14 +330,8 @@ export const TahapSetelahPengecekan = ({ id, fetchReport }) => {
                   mt="5"
                   mx="3"
                   onClick={() => {
-                    const formData = new FormData();
-                    formData.append("ket_teknisi", values.ket_teknisi);
-                    for (let i = 0; i < values.gambar.length; i++) {
-                      formData.append("gambar[]", values.gambar[i]);
-                    }
-                    btaTech(formData);
+                    setStatus(7);
                     submitForm();
-                    handleReset();
                   }}
                 >
                   Tolak
@@ -339,7 +344,7 @@ export const TahapSetelahPengecekan = ({ id, fetchReport }) => {
                 isLoading={isSubmitting}
                 mt="5"
                 onClick={() => {
-                  fixTech(values);
+                  setStatus(5);
                   submitForm();
                 }}
               >

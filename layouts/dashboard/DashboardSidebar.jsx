@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TempContext } from "../../context/TempContext";
 import {
   Box,
@@ -11,26 +11,147 @@ import {
   Button,
   Image,
   Tooltip,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import NavSection from "./NavSection";
 import path from "../../constant.default";
+import instance from "../../axios.default";
 
 const DashboardSidebar = () => {
   const { colorMode } = useColorMode();
   const [settings, setSettings] = useContext(TempContext);
-
+  const [experience, setExperience] = useState([]);
   const toggleChange = () => {
     setSettings({ ...settings, bigMode: !settings.bigMode });
   };
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toggleSidebar = () => {
     setSettings({ ...settings, active: !settings.active });
   };
 
+  const fetchExp = async () => {
+    try {
+      const result = await instance.get("/exp");
+      setExperience(result.data.data);
+    } catch (error) {
+      alert("ERROR");
+    }
+  };
+
+  useEffect(() => {
+    fetchExp();
+  }, []);
+
   const exp =
     settings && settings.userLogin && parseInt(settings.userLogin.current_exp);
+
+  const modalExp = (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader display="flex" flexDirection="column">
+          <Box fontWeight="bold">Level</Box>
+          <Box
+            background="#FFD202"
+            px="3"
+            borderRadius="lg"
+            width="max-content"
+            mt="3"
+          >
+            {exp} EXP
+          </Box>
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          {experience.map((res) => {
+            const expe = parseInt(res.exp);
+            let a = "";
+
+            if (parseInt(res.id) === 1) {
+              a += exp <= expe ? "3px solid #FFD202" : null;
+            } else if (parseInt(res.id) !== 7) {
+              a +=
+                exp >= expe / 2 + 1 && exp <= expe ? "3px solid #FFD202" : null;
+            } else {
+              a += exp > expe ? "3px solid #FFD202" : null;
+            }
+            return (
+              <Box
+                key={res.id}
+                display="flex"
+                background="gray.100"
+                my="5"
+                p="3"
+                borderRadius="xl"
+                border={a}
+              >
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  width="20%"
+                >
+                  <Box
+                    as="object"
+                    data={`/assets/svg/${
+                      expe <= 100
+                        ? "bronze"
+                        : expe >= 101 && expe <= 200
+                        ? "silver"
+                        : expe >= 201 && expe <= 400
+                        ? "gold"
+                        : expe >= 401 && expe <= 800
+                        ? "diamond"
+                        : expe >= 801 && expe <= 1600
+                        ? "ruby"
+                        : expe >= 1601 && expe <= 3200
+                        ? "Sapphire"
+                        : "emerald"
+                    }.svg`}
+                    type="image/svg+xml"
+                    maxW="100%"
+                    height={["14"]}
+                    pointerEvents="none"
+                  ></Box>
+                </Box>
+                <Box>
+                  <Box fontWeight="bold" fontSize="1.2em">
+                    {res.nama}
+                  </Box>
+                  <Box>
+                    {parseInt(res.id) === 1
+                      ? "0"
+                      : parseInt(res.id) === 7
+                      ? ""
+                      : expe / 2 + 1}
+                    {parseInt(res.id) === 7 ? "" : " - "}
+                    {expe}
+                    {parseInt(res.id) === 7 ? "++" : null}
+                  </Box>
+                </Box>
+              </Box>
+            );
+          })}
+        </ModalBody>
+
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={onClose}>
+            Tutup
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  );
 
   return (
     <Box
@@ -109,7 +230,7 @@ const DashboardSidebar = () => {
         alignItems="center"
         _groupHover={{ justifyContent: "space-between" }}
       >
-        <Link href="/dashboard/home" passHref={true}>
+        <Link href="/" passHref={true}>
           <a>
             <Image boxSize="50px" src="/assets/img/EROR.png" alt="E-ROR" />
           </a>
@@ -166,14 +287,18 @@ const DashboardSidebar = () => {
         _groupHover={{ boxShadow: "xl", mx: "3", my: "7", py: "4" }}
         background={colorMode === "dark" ? "gray.900" : "gray.50"}
       >
-        <Avatar
-          size="md"
-          name={settings.userLogin.nama_lengkap}
-          background={colorMode === "dark" ? "white" : "orange"}
-          color={colorMode === "dark" ? "black" : "white"}
-          border={`2px solid ${colorMode === "dark" ? "white" : "black"}`}
-          src={path + settings.userLogin.foto_profile}
-        />
+        <Link href="/profile" passHref>
+          <a>
+            <Avatar
+              size="md"
+              name={settings.userLogin.nama_lengkap}
+              background={colorMode === "dark" ? "white" : "orange"}
+              color={colorMode === "dark" ? "black" : "white"}
+              border={`2px solid ${colorMode === "dark" ? "white" : "black"}`}
+              src={path + settings.userLogin.foto_profile}
+            />
+          </a>
+        </Link>
         <Box
           mx="3"
           display={[
@@ -185,6 +310,8 @@ const DashboardSidebar = () => {
             settings.bigMode === true ? "none" : "inline",
           ]}
           _groupHover={{ display: "inline" }}
+          cursor="pointer"
+          onClick={() => onOpen()}
         >
           <Heading fontSize="md">
             {settings.userLogin &&
@@ -243,6 +370,7 @@ const DashboardSidebar = () => {
           )}
         </Box>
       </Box>
+      {modalExp}
       <NavSection />
     </Box>
   );

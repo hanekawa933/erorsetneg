@@ -312,7 +312,7 @@ function History() {
         <TabPanel p="0">
           {data[cat.nama.toLowerCase()] < 1 ? (
             notFound(cat.nama.toLowerCase())
-          ) : (
+          ) : parseInt(statusUsed) === 999 ? (
             <Grid templateColumns={gridResponsive} gap={["3", "6"]} mt="5">
               {data[cat.nama.toLowerCase()]
                 .map((res) => {
@@ -336,8 +336,13 @@ function History() {
                 })
                 .slice(content.start, content.end)}
             </Grid>
+          ) : (
+            notFound(
+              cat.nama.toLowerCase() +
+                ` dengan status ${activeStatus[0].nama.toLowerCase()}`
+            )
           )}
-          {data[cat.nama.toLowerCase()].length <=
+          {parseInt(data[cat.nama.toLowerCase()].length) <=
           parseInt(content.end) ? null : (
             <Box
               mt="5"
@@ -500,7 +505,6 @@ function History() {
       : parseInt(activeStatus[0].id) === 999
       ? "orange"
       : "gray";
-
   return (
     <div>
       <Head>
@@ -625,13 +629,29 @@ function History() {
                 </Box>
                 <TabPanels>
                   <TabPanel p="0">
-                    <Grid
-                      templateColumns={gridResponsive}
-                      gap={["3", "6"]}
-                      mt="5"
-                    >
-                      {allCategory}
-                    </Grid>
+                    {parseInt(statusUsed) === 999 ? (
+                      report.length < 1 ? (
+                        notFound(activeStatus[0].nama.toLowerCase())
+                      ) : (
+                        <Grid
+                          templateColumns={gridResponsive}
+                          gap={["3", "6"]}
+                          mt="5"
+                        >
+                          {allCategory}
+                        </Grid>
+                      )
+                    ) : filteredStatus.length > 1 ? (
+                      <Grid
+                        templateColumns={gridResponsive}
+                        gap={["3", "6"]}
+                        mt="5"
+                      >
+                        {allCategory}
+                      </Grid>
+                    ) : (
+                      notFound(activeStatus[0].nama.toLowerCase())
+                    )}
                     {report.length < 1 ? notFound("", true) : ""}
                   </TabPanel>
                   {tabList}

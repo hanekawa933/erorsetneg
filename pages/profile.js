@@ -26,6 +26,13 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
 } from "@chakra-ui/react";
 import DashboardLayout from "../layouts/dashboard";
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -44,6 +51,13 @@ const ProfileApp = () => {
   const { colorMode } = useColorMode();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    isOpen: isOpenDrawer,
+    onOpen: onOpenDrawer,
+    onClose: onCloseDrawer,
+  } = useDisclosure();
+
   const [userLogin, setUserLogin] = useState([]);
   const [settings, setSettings] = useContext(TempContext);
   const [change, setChange] = useState(0);
@@ -197,6 +211,8 @@ const ProfileApp = () => {
                       colorMode === "dark" ? "black" : "white"
                     }`}
                     src={path + userLogin.foto_profile}
+                    onClick={() => onOpenDrawer()}
+                    cursor="pointer"
                   />
                   <Box
                     position="absolute"
@@ -242,7 +258,7 @@ const ProfileApp = () => {
               <Box mt="28" px={["0", "8", "20"]} py="10">
                 <Tabs isFitted>
                   <TabList>
-                    <Tab>Ganti Profile</Tab>
+                    <Tab>Ganti Data Diri</Tab>
                     <Tab>Ganti Password</Tab>
                   </TabList>
                   <TabPanels>
@@ -260,6 +276,31 @@ const ProfileApp = () => {
             </Skeleton>
           </Box>
         </Box>
+        <Drawer onClose={onCloseDrawer} isOpen={isOpenDrawer} size="full">
+          <DrawerOverlay />
+          <DrawerContent
+            bg={colorMode === "dark" ? "blackAlpha.500" : "whiteAlpha.500"}
+          >
+            <DrawerCloseButton />
+            <DrawerBody
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Avatar
+                background={colorMode === "dark" ? "white" : "orange"}
+                color={colorMode === "dark" ? "black" : "white"}
+                name={userLogin.nama_lengkap}
+                position="absolute"
+                boxShadow="lg"
+                width="96"
+                height="96"
+                border={`4px solid ${colorMode === "dark" ? "black" : "white"}`}
+                src={path + userLogin.foto_profile}
+              />
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
       </DashboardLayout>
     </>
   );

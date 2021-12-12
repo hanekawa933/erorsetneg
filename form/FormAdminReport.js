@@ -17,6 +17,7 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
   const Schema = Yup.object().shape({
     ket_admin: Yup.string().required("Input tidak boleh kosong"),
   });
+  const [status, setStatus] = useState();
 
   const validateReport = async (data) => {
     const body = JSON.stringify(data);
@@ -128,7 +129,13 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
       ket_admin: "",
     },
     validationSchema: Schema,
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      const stats = parseInt(status);
+      stats === 2
+        ? await duplicateReport(values)
+        : stats === 3
+        ? await validateReport(values)
+        : await finishAdmin(values);
       setSubmitting(false);
       resetForm({});
     },
@@ -178,7 +185,7 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
                   mt="5"
                   mx="3"
                   onClick={() => {
-                    duplicateReport(values);
+                    setStatus(2);
                     submitForm();
                   }}
                 >
@@ -189,7 +196,7 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
                   isLoading={isSubmitting}
                   mt="5"
                   onClick={() => {
-                    validateReport(values);
+                    setStatus(3);
                     submitForm();
                   }}
                 >
@@ -203,7 +210,7 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
                 mt="5"
                 mx="3"
                 onClick={() => {
-                  duplicateReport(values);
+                  setStatus(2);
                   submitForm();
                 }}
               >
@@ -215,7 +222,7 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
                 isLoading={isSubmitting}
                 mt="5"
                 onClick={() => {
-                  validateReport(values);
+                  setStatus(3);
                   submitForm();
                 }}
               >
@@ -227,7 +234,7 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
                 isLoading={isSubmitting}
                 mt="5"
                 onClick={() => {
-                  finishAdmin(values);
+                  setStatus(7);
                   submitForm();
                 }}
                 display={parseInt(statusId) !== 7 ? "none" : "initial"}

@@ -72,7 +72,8 @@ function ValidatorPage() {
       return;
     }
 
-    const queryUsed = parseInt(userLogin.role_id) === 2 ? "admin" : "teknisi";
+    const queryUsed =
+      parseInt(userLogin.role_id) === 2 ? "admin_web" : "teknisi";
     fetchCategoryById(id);
     fetchReportByCategoryId(id, queryUsed);
   }, [router.isReady, loading]);

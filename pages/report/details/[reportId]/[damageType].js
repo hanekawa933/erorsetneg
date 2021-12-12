@@ -203,7 +203,7 @@ function DetailsReport() {
                 </Link>
               </Box>
             ) : null}
-            <Box pb="10">
+            <Box px="5" pb="10">
               <Box display="flex" justifyContent="space-between">
                 <Box display="flex" flexDir="column" width="max-content" py="5">
                   <Text fontSize="1em" fontWeight="bold" color="gray.600">
@@ -227,6 +227,7 @@ function DetailsReport() {
                     borderRadius="full"
                     mt="3"
                     fontSize={["1em", "1em", "1.1em"]}
+                    width="max-content"
                   >
                     {report.status}
                   </Badge>
@@ -306,6 +307,7 @@ function DetailsReport() {
                     src={path + report.foto_profile}
                     name={report.nama_lengkap}
                     size="2xl"
+                    background={colorMode === "dark" ? "white" : "orange"}
                   />
                   <Box mx="10">
                     <Box
