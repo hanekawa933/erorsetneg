@@ -89,7 +89,7 @@ const DashboardSidebar = () => {
               <Box
                 key={res.id}
                 display="flex"
-                background="gray.100"
+                background={colorMode === "dark" ? "gray.900" : "gray.100"}
                 my="5"
                 p="3"
                 borderRadius="xl"
