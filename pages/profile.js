@@ -211,8 +211,10 @@ const ProfileApp = () => {
                       colorMode === "dark" ? "black" : "white"
                     }`}
                     src={path + userLogin.foto_profile}
-                    onClick={() => onOpenDrawer()}
-                    cursor="pointer"
+                    onClick={
+                      !userLogin.foto_profile ? null : () => onOpenDrawer()
+                    }
+                    cursor={!userLogin.foto_profile ? "auto" : "pointer"}
                   />
                   <Box
                     position="absolute"
@@ -279,7 +281,7 @@ const ProfileApp = () => {
         <Drawer onClose={onCloseDrawer} isOpen={isOpenDrawer} size="full">
           <DrawerOverlay />
           <DrawerContent
-            bg={colorMode === "dark" ? "blackAlpha.500" : "whiteAlpha.500"}
+            bg={colorMode === "dark" ? "blackAlpha.700" : "whiteAlpha.700"}
           >
             <DrawerCloseButton />
             <DrawerBody
@@ -293,8 +295,8 @@ const ProfileApp = () => {
                 name={userLogin.nama_lengkap}
                 position="absolute"
                 boxShadow="lg"
-                width="96"
-                height="96"
+                width="80"
+                height="80"
                 border={`4px solid ${colorMode === "dark" ? "black" : "white"}`}
                 src={path + userLogin.foto_profile}
               />

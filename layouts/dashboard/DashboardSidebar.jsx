@@ -19,6 +19,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Progress,
 } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -55,6 +56,37 @@ const DashboardSidebar = () => {
   const exp =
     settings && settings.userLogin && parseInt(settings.userLogin.current_exp);
 
+  const nextLevel =
+    exp <= 100
+      ? 100
+      : exp >= 101 && exp <= 200
+      ? 201
+      : exp >= 201 && exp <= 400
+      ? 401
+      : exp >= 401 && exp <= 800
+      ? 801
+      : exp >= 801 && exp <= 1600
+      ? 1601
+      : exp >= 1601 && exp <= 3200
+      ? 3201
+      : 9999;
+
+  const expNeeded =
+    exp <= 100
+      ? 100 - exp
+      : exp >= 101 && exp <= 200
+      ? 201 - exp
+      : exp >= 201 && exp <= 400
+      ? 401 - exp
+      : exp >= 401 && exp <= 800
+      ? 801 - exp
+      : exp >= 801 && exp <= 1600
+      ? 1601 - exp
+      : exp >= 1601 && exp <= 3200
+      ? 3201 - exp
+      : "Kamu sudah berada pada level maximal";
+  const currentPercentage = Math.round((exp / nextLevel) * 100);
+
   const modalExp = (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -67,12 +99,33 @@ const DashboardSidebar = () => {
             borderRadius="lg"
             width="max-content"
             mt="3"
+            color="black"
           >
             {exp} EXP
           </Box>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
+          <Box fontWeight="semibold" mb="3">
+            {exp < 3201
+              ? `Kamu butuh ${expNeeded} exp untuk mencapai level berikutnya`
+              : "Kamu sudah mencapai level maximal"}
+          </Box>
+          <Progress
+            hasStripe
+            value={exp < 3201 ? currentPercentage : 100}
+            colorScheme="orange"
+            isAnimated
+          />
+          <Box
+            display="flex"
+            // justifyContent="space-between"
+            fontWeight="semibold"
+            justifyContent="end"
+            width={`${currentPercentage}%`}
+          >
+            <Box>{currentPercentage}%</Box>
+          </Box>
           {experience.map((res) => {
             const expe = parseInt(res.exp);
             let a = "";
