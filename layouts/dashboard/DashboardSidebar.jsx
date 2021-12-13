@@ -84,7 +84,7 @@ const DashboardSidebar = () => {
       ? 1601 - exp
       : exp >= 1601 && exp <= 3200
       ? 3201 - exp
-      : "Kamu sudah berada pada level maximal";
+      : "Kamu sudah berada pada level maksimal";
   const currentPercentage = Math.round((exp / nextLevel) * 100);
 
   const modalExp = (
