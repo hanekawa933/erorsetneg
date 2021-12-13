@@ -77,7 +77,7 @@ function Loading() {
               color="#FFD202"
               height={50}
               width={50}
-              timeout={4500} //3 secs
+              timeout={3500} //3 secs
             />
           </Box>
         </Box>

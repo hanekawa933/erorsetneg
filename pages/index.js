@@ -24,7 +24,7 @@ function Login() {
   if (load) {
     setTimeout(() => {
       setLoad(false);
-    }, 4500);
+    }, 3500);
 
     return <Loading />;
   }
