@@ -1,11 +1,11 @@
 {
-    "theme_color": "#f69435",
-    "background_color": "#f69435",
+    "theme_color": "#252525",
+    "background_color": "#252525",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "erorsetneg",
-    "short_name": "eror",
+    "name": "E-ROR",
+    "short_name": "E-ROR",
     "description": "E-ROR help you anywhere",
     "icons": [
         {
