@@ -306,11 +306,16 @@ function History() {
       return parseInt(stat.status_id) === statusUsed;
     });
 
+    console.log(filteredStatus);
+
     if (filteredStatus < 1) {
       return (
         <TabPanel p="0">
           {data[cat.nama.toLowerCase()] < 1 ? (
-            notFound(cat.nama.toLowerCase())
+            notFound(
+              cat.nama.toLowerCase() +
+                ` dengan status ${activeStatus[0].nama.toLowerCase()}`
+            )
           ) : parseInt(statusUsed) === 999 ? (
             <Grid templateColumns={gridResponsive} gap={["3", "6"]} mt="5">
               {data[cat.nama.toLowerCase()]
@@ -341,8 +346,7 @@ function History() {
                 ` dengan status ${activeStatus[0].nama.toLowerCase()}`
             )
           )}
-          {parseInt(data[cat.nama.toLowerCase()].length) <=
-          parseInt(content.end) ? null : (
+          {parseInt(filteredStatus.length) <= parseInt(content.end) ? null : (
             <Box
               mt="5"
               display="flex"
