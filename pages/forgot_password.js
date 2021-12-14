@@ -98,7 +98,7 @@ function Forgot() {
               type="image/svg+xml"
               data={
                 !email && !otp
-                  ? "/assets/svg/fpw.svg"
+                  ? "/assets/svg/forget_password.svg"
                   : !otp
                   ? "/assets/svg/otp.svg"
                   : "assets/svg/password.svg"

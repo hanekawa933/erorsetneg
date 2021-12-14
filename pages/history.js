@@ -51,6 +51,7 @@ function History() {
   const [loadingCategory, setLoadingCategory] = useState(false);
   const [loadingReport, setLoadingReport] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState(false);
+  const [query, setQuery] = useState("teknisi");
 
   const fetchUserLogin = async () => {
     try {
@@ -73,14 +74,22 @@ function History() {
     }
   };
 
-  const fetchReportByCategoryId = async (query) => {
+  const fetchReportByCategoryId = async () => {
     try {
       if (!userLogin) {
         return;
       }
-      const result = await instance.get(`/laporan/history?query=${query}`);
-      setReport(result.data.data ? result.data.data : []);
-      setLoadingReport(true);
+
+      const role = parseInt(userLogin.role_id);
+
+      if (!role) {
+        return;
+      } else {
+        const query = role === 1 ? "user" : role === 2 ? "admin" : "teknisi";
+        const result = await instance.get(`/laporan/history?query=${query}`);
+        setReport(result.data.data ? result.data.data : []);
+        setLoadingReport(true);
+      }
     } catch (error) {
       alert(error);
     }
@@ -108,18 +117,8 @@ function History() {
   }, []);
 
   useEffect(() => {
-    if (!userLogin) {
-      return;
-    }
-
-    if (userLogin && parseInt(userLogin.role_id) === 1) {
-      fetchReportByCategoryId("user");
-    } else if (userLogin && parseInt(userLogin.role_id) === 2) {
-      fetchReportByCategoryId("admin");
-    } else {
-      fetchReportByCategoryId("teknisi");
-    }
-  }, [loadingReport]);
+    fetchReportByCategoryId();
+  }, [loadingReport, loadingUser]);
 
   status = [{ id: "999", nama: "Semua" }, ...status];
 

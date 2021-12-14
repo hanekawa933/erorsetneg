@@ -177,7 +177,7 @@ const DashboardSidebar = () => {
                     pointerEvents="none"
                   ></Box>
                 </Box>
-                <Box>
+                <Box mx="4">
                   <Box fontWeight="bold" fontSize="1.2em">
                     {res.nama}
                   </Box>
