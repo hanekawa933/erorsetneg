@@ -283,7 +283,7 @@ const DashboardSidebar = () => {
         alignItems="center"
         _groupHover={{ justifyContent: "space-between" }}
       >
-        <Link href="/" passHref={true}>
+        <Link href="/home" passHref={true}>
           <a>
             <Image boxSize="50px" src="/assets/img/EROR.png" alt="E-ROR" />
           </a>
