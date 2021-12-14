@@ -28,8 +28,10 @@ import { TempContext } from "../context/TempContext";
 import instance from "../axios.default";
 import { useEffect, useContext, useState } from "react";
 import { ProtectedRoute } from "../HOC/withAuth";
+import { useRouter } from "next/router";
 
 function History() {
+  const router = useRouter();
   const { colorMode } = useColorMode();
   const gridResponsive = [
     "repeat(1, 1fr)",
@@ -70,7 +72,14 @@ function History() {
       setStatus(result.data.data ? result.data.data : []);
       setLoadingStatus(true);
     } catch (error) {
-      alert("error");
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("401")
+        : statusCode === 403
+        ? router.push("403")
+        : router.push("500");
     }
   };
 
@@ -91,7 +100,14 @@ function History() {
         setLoadingReport(true);
       }
     } catch (error) {
-      alert(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("401")
+        : statusCode === 403
+        ? router.push("403")
+        : router.push("500");
     }
   };
 
@@ -101,8 +117,14 @@ function History() {
       setCategory(result.data.data ? result.data.data : []);
       setLoadingCategory(true);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 
@@ -305,8 +327,6 @@ function History() {
     const filteredStatus = data[cat.nama.toLowerCase()].filter((stat) => {
       return parseInt(stat.status_id) === statusUsed;
     });
-
-    console.log(filteredStatus);
 
     if (filteredStatus < 1) {
       return (

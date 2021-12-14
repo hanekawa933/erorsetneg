@@ -10,8 +10,10 @@ import {
 import * as Yup from "yup";
 import { useFormik, Form, FormikProvider } from "formik";
 import instance from "../axios.default";
+import { useRouter } from "next/router";
 
 const FormFaq = () => {
+  const router = useRouter();
   const logoRef = useRef();
 
   const handleReset = () => {
@@ -34,7 +36,14 @@ const FormFaq = () => {
       const result = await instance.post("/faq", data, config);
       setCreate(result.data.data);
     } catch (error) {
-      alert(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 

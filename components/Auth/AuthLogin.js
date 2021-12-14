@@ -78,8 +78,8 @@ const AuthLogin = () => {
     validationSchema: Schema,
     onSubmit: async (values, { resetForm, setSubmitting, setFieldValue }) => {
       await login(values);
-      setFieldValue("email", values.email);
       resetForm();
+      setFieldValue("email", values.email);
     },
   });
 

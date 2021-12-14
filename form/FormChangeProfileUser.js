@@ -24,7 +24,6 @@ const FormChangeProfileUser = ({ changed }) => {
       const result = await instance.get("/user/profile");
       setUserLogin(result.data.data);
     } catch (error) {
-      alert(error);
       router.push("/");
     }
   };

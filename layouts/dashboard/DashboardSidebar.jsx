@@ -26,6 +26,7 @@ import Link from "next/link";
 import NavSection from "./NavSection";
 import path from "../../constant.default";
 import instance from "../../axios.default";
+import { useRouter } from "next/router";
 
 const DashboardSidebar = () => {
   const { colorMode } = useColorMode();
@@ -40,12 +41,20 @@ const DashboardSidebar = () => {
     setSettings({ ...settings, active: !settings.active });
   };
 
+  const router = useRouter();
   const fetchExp = async () => {
     try {
       const result = await instance.get("/exp");
       setExperience(result.data.data);
     } catch (error) {
-      alert("ERROR");
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 
@@ -122,7 +131,7 @@ const DashboardSidebar = () => {
             // justifyContent="space-between"
             fontWeight="semibold"
             justifyContent="end"
-            width={`${currentPercentage}%`}
+            width={currentPercentage < 5 ? "5%" : `${currentPercentage}%`}
           >
             <Box>{currentPercentage}%</Box>
           </Box>
@@ -363,8 +372,12 @@ const DashboardSidebar = () => {
             settings.bigMode === true ? "none" : "inline",
           ]}
           _groupHover={{ display: "inline" }}
-          cursor="pointer"
-          onClick={() => onOpen()}
+          cursor={
+            parseInt(settings.userLogin.role_id) === 1 ? "pointer" : "auto"
+          }
+          onClick={
+            parseInt(settings.userLogin.role_id) === 1 ? () => onOpen() : null
+          }
         >
           <Heading fontSize="md">
             {settings.userLogin &&

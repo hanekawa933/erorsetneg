@@ -6,17 +6,15 @@ import {
   Input,
   Button,
   FormErrorMessage,
-  Text,
-  InputGroup,
-  InputLeftAddon,
-  InputRightAddon,
   Select,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { useFormik, Form, FormikProvider } from "formik";
 import instance from "../axios.default";
+import { useRouter } from "next/router";
 
 const FormUser = () => {
+  const router = useRouter();
   const [role, setRole] = useState([]);
   const Schema = Yup.object().shape({
     nama_lengkap: Yup.string().required("Input tidak boleh kosong"),
@@ -42,7 +40,14 @@ const FormUser = () => {
       const role = await instance.get("/role");
       setRole(role.data.data);
     } catch (error) {
-      alert(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 
@@ -56,8 +61,14 @@ const FormUser = () => {
     try {
       const result = await instance.post("/user", body, config);
     } catch (error) {
-      alert(error);
-      console.log(error.response);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 

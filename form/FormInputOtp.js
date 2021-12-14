@@ -64,7 +64,6 @@ const FormInputOtp = () => {
       });
       const encoded = encodeURIComponent(email);
       router.push(`/forgot_password?email=${encoded}`);
-      console.log(error.response);
     }
   };
 
@@ -129,7 +128,6 @@ const FormInputOtp = () => {
         duration: 2000,
         position: "top",
       });
-      console.log(error.response);
     }
   };
 

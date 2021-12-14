@@ -8,8 +8,10 @@ import "moment/locale/id";
 import UserCreatePage from "../../../components/UserCreatePage";
 import ValidatorPage from "../../../components/ValidatorPage";
 import { ProtectedRoute } from "../../../HOC/withAuth";
+import { useRouter } from "next/router";
 
 function Reports() {
+  const router = useRouter();
   const [userLogin, setUserLogin] = useState([]);
   const [settings, setSettings] = useContext(TempContext);
 

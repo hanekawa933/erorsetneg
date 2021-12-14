@@ -16,8 +16,10 @@ import { Icon } from "@iconify/react";
 import instance from "../../axios.default";
 import moment from "moment";
 import "moment/locale/id";
+import { useRouter } from "next/router";
 
 const DashboardNavbar = () => {
+  const router = useRouter();
   const NavbarMobile = "64px";
   const NavbarDesktop = "92px";
   const { colorMode, toggleColorMode } = useColorMode();
@@ -35,8 +37,14 @@ const DashboardNavbar = () => {
       const result = await instance.get("/notifikasi/user");
       setNotif(result.data.data);
     } catch (error) {
-      alert("Error");
-      console.log(result);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 

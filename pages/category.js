@@ -7,8 +7,10 @@ import { useEffect, useContext, useState } from "react";
 import { ProtectedRoute } from "../HOC/withAuth";
 import { TempContext } from "../context/TempContext";
 import instance from "../axios.default";
+import { useRouter } from "next/router";
 
 function CategoryList() {
+  const router = useRouter();
   const gridResponsive = [
     "repeat(3, 1fr)",
     "repeat(1, 1fr)",
@@ -36,7 +38,14 @@ function CategoryList() {
       const result = await instance.get("/kategori");
       setCategory(result.data.data);
     } catch (error) {
-      alert(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 

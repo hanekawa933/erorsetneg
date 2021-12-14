@@ -68,7 +68,14 @@ function DetailsReport() {
       const result = await instance.get(`/laporan/item/id/${id}`);
       setReport(result.data.data);
     } catch (error) {
-      alert(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 

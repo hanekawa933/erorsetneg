@@ -90,8 +90,14 @@ const UserHomepage = () => {
       setCategory(result.data.data);
       setLoadingCategory(true);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("/401")
+        : statusCode === 403
+        ? router.push("/403")
+        : router.push("/500");
     }
   };
 
@@ -101,8 +107,14 @@ const UserHomepage = () => {
       setReport(result.data.data ? result.data.data : []);
       setLoadingReport(true);
     } catch (error) {
-      alert(error);
-      console.log(error);
+      const statusCode = parseInt(error.response.status);
+      statusCode === 404
+        ? router.push("/404")
+        : statusCode === 401
+        ? router.push("401")
+        : statusCode === 403
+        ? router.push("403")
+        : router.push("500");
     }
   };
 

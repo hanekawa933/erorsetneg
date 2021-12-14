@@ -1,11 +1,11 @@
 import { Box, useColorMode, Image, Progress } from "@chakra-ui/react";
 import Head from "next/head";
 
-function Custom500() {
+function Custom401() {
   return (
     <>
       <Head>
-        <title>E-ROR | 500 - Server Error</title>
+        <title>E-ROR | 403 - Forbidden Access</title>
       </Head>
       <Box
         background="gray.800"
@@ -32,7 +32,7 @@ function Custom500() {
         </Box>
         <Box display="flex" alignItems="center" px={["10", "0"]} mt="5">
           <Box as="h2" fontWeight="bold">
-            500
+            403
           </Box>
           <Box
             height="10"
@@ -45,7 +45,7 @@ function Custom500() {
           ></Box>
           <Box>
             <Box as="h2" fontWeight="bold">
-              Server Error
+              Forbidden Access
             </Box>
           </Box>
         </Box>
@@ -54,4 +54,4 @@ function Custom500() {
   );
 }
 
-export default Custom500;
+export default Custom403;

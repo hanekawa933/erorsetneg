@@ -46,8 +46,10 @@ import { FormChangeProfileUser, FormChangePassword } from "../form";
 import { ProtectedRoute } from "../HOC/withAuth";
 import { Icon } from "@iconify/react";
 import path from "../constant.default";
+import { useRouter } from "next/router";
 
 const ProfileApp = () => {
+  const router = useRouter();
   const { colorMode } = useColorMode();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();

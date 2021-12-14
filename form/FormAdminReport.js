@@ -40,7 +40,6 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
         duration: 2000,
         position: "top",
       });
-      console.log(result);
     } catch (error) {
       toast({
         title: "Gagal",
@@ -49,8 +48,6 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
         duration: 2000,
         position: "top",
       });
-      alert(error);
-      console.log(error);
     }
   };
 
@@ -75,7 +72,6 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
         duration: 2000,
         position: "top",
       });
-      console.log(result);
     } catch (error) {
       toast({
         title: "Gagal",
@@ -84,8 +80,6 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
         duration: 2000,
         position: "top",
       });
-      alert(error);
-      console.log(error);
     }
   };
 
@@ -110,10 +104,7 @@ const FormAdminReport = ({ id, statusId, fetchReport }) => {
         duration: 2000,
         position: "top",
       });
-      console.log(result);
     } catch (error) {
-      alert(error);
-      console.log(error);
       toast({
         title: "Gagal",
         description: error.response.data.message,
