@@ -1,7 +1,7 @@
 import { Box, useColorMode, Image, Progress } from "@chakra-ui/react";
 import Head from "next/head";
 
-function Custom401() {
+function Custom403() {
   return (
     <>
       <Head>
