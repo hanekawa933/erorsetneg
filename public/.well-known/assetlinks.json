@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "xyz.appmaker.ondkdf",
+      "sha256_cert_fingerprints": ["E3:D3:D9:05:F4:B8:E2:21:11:47:38:FB:77:B2:9A:EF:E7:A7:BA:8F:9C:AA:F1:86:90:1D:7D:96:17:5A:16:3B"]
+    }
+  }
+]
