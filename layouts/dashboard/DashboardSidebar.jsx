@@ -94,6 +94,7 @@ const DashboardSidebar = () => {
       : exp >= 1601 && exp <= 3200
       ? 3201 - exp
       : "Kamu sudah berada pada level maksimal";
+
   const currentPercentage = Math.round((exp / nextLevel) * 100);
 
   const modalExp = (
@@ -133,7 +134,7 @@ const DashboardSidebar = () => {
             justifyContent="end"
             width={currentPercentage < 5 ? "5%" : `${currentPercentage}%`}
           >
-            <Box>{currentPercentage}%</Box>
+            <Box>{exp < 3201 ? currentPercentage : "100"}%</Box>
           </Box>
           {experience.map((res) => {
             const expe = parseInt(res.exp);
