@@ -1,30 +1,15 @@
-import { useEffect, useContext, useState } from "react";
-import { ProtectedRoute } from "../HOC/withAuth";
 import Head from "next/head";
-import DashboardLayout from "../layouts/dashboard";
-import CardCategory from "../components/CardCategory";
 import {
   Box,
   Heading,
   Text,
-  Grid,
   useColorMode,
-  Button,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   ListItem,
   OrderedList,
+  Button,
 } from "@chakra-ui/react";
-import { TempContext } from "../context/TempContext";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import instance from "../axios.default";
-import { useRouter } from "next/router";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import Link from "next/link";
 
 const TnAGeneral = () => {
   const { colorMode } = useColorMode();
@@ -167,6 +152,13 @@ const TnAGeneral = () => {
               Proses pendaftaran mengisikan dengan data diri yang benar.
             </ListItem>
           </OrderedList>
+          <Link href="/" passHref>
+            <a>
+              <Button mt="5" leftIcon={<ArrowBackIcon />} colorScheme="orange">
+                Kembali ke Halaman Utama
+              </Button>
+            </a>
+          </Link>
         </Box>
       </Box>
     </div>
