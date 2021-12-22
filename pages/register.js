@@ -11,11 +11,13 @@ import {
   Divider,
   Span,
   Link as ChakraLink,
+  useColorMode,
 } from "@chakra-ui/react";
 import AuthRegister from "../components/Auth/AuthRegister";
 import Link from "next/link";
 
 function Register() {
+  const { colorMode } = useColorMode();
   return (
     <div>
       <Head>
@@ -101,7 +103,10 @@ function Register() {
               <Text fontSize="1.2em" color="gray.400" fontWeight="semibold">
                 Electronic - Request For Repair
               </Text>
-              <Heading fontSize="1.5em" color="gray.900">
+              <Heading
+                fontSize="1.5em"
+                color={colorMode === "dark" ? "gray.100" : "gray.900"}
+              >
                 Solusi untuk penanganan kerusakan sarana dan prasarana secara
                 elektronik.
               </Heading>

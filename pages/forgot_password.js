@@ -126,7 +126,13 @@ function Forgot() {
                   ? "Cek email anda!"
                   : "Ubah password"}
               </Heading>
-              <Text mt="3" color="gray.600" fontWeight="semibold">
+              <Text
+                mt="3"
+                color={
+                  useColorMode().colorMode === "dark" ? "gray.100" : "gray.900"
+                }
+                fontWeight="semibold"
+              >
                 {!email && !otp
                   ? "Jangan khawatir! Anda dapat me-reset password anda dengan memasukan email akun pada."
                   : !otp
