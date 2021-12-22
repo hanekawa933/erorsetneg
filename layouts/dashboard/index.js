@@ -16,6 +16,7 @@ const DashboardLayout = ({ children }) => {
       <DashboardNavbar />
       <DashboardSidebar />
       <Box
+        position="relative"
         sx={{
           "--calc-mobile": `calc(${NavbarMobile} + 24px)`,
           "--calc-desktop": `calc(${NavbarDesktop} + 24px)`,
@@ -38,8 +39,26 @@ const DashboardLayout = ({ children }) => {
           settings.bigMode === true ? "90px" : "280px",
           settings.bigMode === true ? "90px" : "280px",
         ]}
+        pb="5%"
       >
         {children}
+        {/* <Box
+          position="absolute"
+          right="0"
+          left="0"
+          bottom="0"
+          width="100%"
+          zIndex="599"
+          display="flex"
+          justifyContent="center"
+          fontWeight="semibold"
+          p="5"
+          background="gray.100"
+          textAlign="center"
+        >
+          &copy; 2021 Electronic Repair for Request - All Rights Reserved by
+          SetnegX
+        </Box> */}
       </Box>
     </Box>
   );

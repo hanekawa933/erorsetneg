@@ -11,6 +11,18 @@ import {
   InputRightElement,
   InputGroup,
   useToast,
+  Checkbox,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  List,
+  ListItem,
+  OrderedList,
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import * as Yup from "yup";
@@ -20,10 +32,12 @@ import instance from "../../axios.default";
 import router, { useRouter } from "next/router";
 
 const AuthRegister = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const Router = useRouter();
   const [hidden, setHidden] = useState(true);
   const [verifyHidden, setVerifyHidden] = useState(true);
+  const [scrollBehavior, setScrollBehavior] = useState("inside");
 
   const Schema = Yup.object().shape({
     email: Yup.string()
@@ -36,6 +50,10 @@ const AuthRegister = () => {
       .oneOf([Yup.ref("password"), null], "Passwords tidak sama")
       .required("Input tidak boleh kosong"),
     nama_lengkap: Yup.string().required("Input Lengkap tidak boleh kosong"),
+    tna: Yup.bool().oneOf(
+      [true],
+      "Kamu harus menyetujui kebijakan layanan dan privasi"
+    ),
   });
 
   const register = async (val) => {
@@ -76,9 +94,11 @@ const AuthRegister = () => {
       password: "",
       nama_lengkap: "",
       password_verify: "",
+      tna: false,
     },
     validationSchema: Schema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
+      delete values.tna;
       await register(values);
       resetForm();
     },
@@ -188,6 +208,31 @@ const AuthRegister = () => {
             </FormErrorMessage>
           </FormControl>
         </Box>
+        <Box display="flex" alignItems="center" mt="5">
+          <FormControl
+            id="nama_lengkap"
+            isInvalid={Boolean(touched.tna && errors.tna)}
+            width="max-content"
+          >
+            <Checkbox name="tna" {...getFieldProps("tna")} onBlur={handleBlur}>
+              <Box
+                cursor="pointer"
+                _hover={{ textDecoration: "underline" }}
+                onClick={() => onOpen()}
+              >
+                Saya setuju dengan{" "}
+                <Box as="span" color="orange">
+                  kebijakan layanan
+                </Box>{" "}
+                dan{" "}
+                <Box as="span" color="orange">
+                  privasi
+                </Box>
+              </Box>
+            </Checkbox>
+            <FormErrorMessage>{touched.tna && errors.tna}</FormErrorMessage>
+          </FormControl>
+        </Box>
         <Button
           type="submit"
           colorScheme="orange"
@@ -198,6 +243,70 @@ const AuthRegister = () => {
           Daftar
         </Button>
       </Form>
+      <Modal
+        onClose={onClose}
+        isOpen={isOpen}
+        scrollBehavior={scrollBehavior}
+        size="xl"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Kebijakan layanan dan privasi</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <OrderedList>
+              <ListItem>
+                Pengguna dengan ini menyatakan bahwa pengguna adalah orang yang
+                cakap dan mampu untuk mengikatkan dirinya dalam sebuah
+                perjanjian yang sah menurut hukum.
+              </ListItem>
+              <ListItem>
+                E-ROR memiliki kewenangan untuk menutup akun Pengguna baik
+                sementara maupun permanen apabila didapati adanya tindakan
+                pelanggaran terhadap Syarat dan Ketentuan E-ROR . Pengguna
+                menyetujui bahwa E-ROR berhak melakukan tindakan lain yang
+                diperlukan terkait hal tersebut, termasuk menolak pengajuan
+                pembukaan akun yang baru apabila ditemukan kesamaan data yang
+                bermasalah sebelumnya.
+              </ListItem>
+              <ListItem>
+                E-ROR adalah suatu app atau web portal, yakni situs atau app
+                terkait pelaporan kerusakan sarana/prasarana. Selanjutnya
+                disebut E-ROR.
+              </ListItem>
+              <ListItem>
+                Syarat & ketentuan adalah perjanjian antara Pengguna dan E-ROR
+                yang berisikan seperangkat peraturan yang mengatur hak,
+                kewajiban, tanggung jawab pengguna dan E-ROR, serta tata cara
+                penggunaan sistem layanan E-ROR.
+              </ListItem>
+              <ListItem>
+                APP E-ROR tidak memungut biaya pendaftaran kepada Pengguna.
+              </ListItem>
+              <ListItem>
+                Pengguna mengerti untuk dan memahami atas pelaporan kerusakan
+                yang dikirimkan melalui APP/ website dan dapat
+                dipertanggungjawabkan
+              </ListItem>
+              <ListItem>
+                Pengguna mengirimkan lampiran foto atau video yang sesuai,
+                apabila ditemukan foto/video yang mengandung unsur SARA/tidak
+                senonoh, maka pengguna akan bertanggungjawab atas pelaporannya
+                dan diproses secara hukum yang berlaku.
+              </ListItem>
+              <ListItem>
+                Dilarang memodifikasi/mengedit/meretas situs/APP.
+              </ListItem>
+              <ListItem>
+                Proses pendaftaran mengisikan dengan data diri yang benar.
+              </ListItem>
+            </OrderedList>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </FormikProvider>
   );
 };

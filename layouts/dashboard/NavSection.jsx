@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 
 const logoutIcon = "simple-line-icons:logout";
+const terms = "fe:document";
 const getIcon = (icon) => <Icon icon={icon} width={22} height={22} />;
 
 const NavSection = () => {
@@ -105,10 +106,10 @@ const NavSection = () => {
     );
   };
 
-  const checkWhatListIsActive = (path, key, icon, text, log) =>
+  const checkWhatListIsActive = (path, key, icon, text) =>
     path === router.pathname
-      ? ActiveList(path, key, icon, text, log)
-      : NonActiveList(path, key, icon, text, log);
+      ? ActiveList(path, key, icon, text)
+      : NonActiveList(path, key, icon, text);
 
   const GeneralList = general.map((data, index) => {
     return checkWhatListIsActive(data.to, index, data.icon, data.text);
@@ -226,7 +227,22 @@ const NavSection = () => {
         >
           menu
         </Box>
-        <List px="5">{UserList}</List>
+        <List px="5">
+          {UserList}
+          {"/terms_and_agreements" === router.pathname
+            ? ActiveList(
+                "/terms_and_agreements",
+                "93921",
+                getIcon(terms),
+                "layanan dan privasi"
+              )
+            : NonActiveList(
+                "/terms_and_agreements",
+                "93921",
+                getIcon(terms),
+                "layanan dan privasi"
+              )}
+        </List>
       </Box>
     </Box>
   );
