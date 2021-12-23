@@ -23,6 +23,7 @@ import {
   List,
   ListItem,
   OrderedList,
+  useColorMode,
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import * as Yup from "yup";
@@ -32,6 +33,7 @@ import instance from "../../axios.default";
 import router, { useRouter } from "next/router";
 
 const AuthRegister = () => {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const Router = useRouter();
@@ -264,7 +266,11 @@ const AuthRegister = () => {
                 E-ROR adalah suatu app atau web portal{" "}
                 <Link href="/">
                   <a>
-                    <Box color="blue.300" as="span">
+                    <Box
+                      color={colorMode === "dark" ? "blue.300" : "blue.400"}
+                      as="span"
+                    >
+                      www.
                       {typeof window !== "undefined" && window.location.hostname
                         ? window.location.hostname
                         : ""}
@@ -278,7 +284,11 @@ const AuthRegister = () => {
                 Situs pelaporan kerusakan adalah{" "}
                 <Link href="/">
                   <a>
-                    <Box color="blue.300" as="span">
+                    <Box
+                      color={colorMode === "dark" ? "blue.300" : "blue.400"}
+                      as="span"
+                    >
+                      www.
                       {typeof window !== "undefined" && window.location.hostname
                         ? window.location.hostname
                         : ""}

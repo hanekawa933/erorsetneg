@@ -111,7 +111,11 @@ const TnAGeneral = () => {
               E-ROR adalah suatu app atau web portal{" "}
               <Link href="/">
                 <a>
-                  <Box color="blue.300" as="span">
+                  <Box
+                    color={colorMode === "dark" ? "blue.300" : "blue.400"}
+                    as="span"
+                  >
+                    www.
                     {typeof window !== "undefined" && window.location.hostname
                       ? window.location.hostname
                       : ""}
@@ -125,7 +129,11 @@ const TnAGeneral = () => {
               Situs pelaporan kerusakan adalah{" "}
               <Link href="/">
                 <a>
-                  <Box color="blue.300" as="span">
+                  <Box
+                    color={colorMode === "dark" ? "blue.300" : "blue.400"}
+                    as="span"
+                  >
+                    www.
                     {typeof window !== "undefined" && window.location.hostname
                       ? window.location.hostname
                       : ""}
