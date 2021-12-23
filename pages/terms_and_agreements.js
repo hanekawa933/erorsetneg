@@ -241,7 +241,6 @@ const TnA = () => {
                         color={colorMode === "dark" ? "blue.300" : "blue.400"}
                         as="span"
                       >
-                        www.
                         {typeof window !== "undefined" &&
                         window.location.hostname
                           ? window.location.hostname
@@ -260,7 +259,6 @@ const TnA = () => {
                         color={colorMode === "dark" ? "blue.300" : "blue.400"}
                         as="span"
                       >
-                        www.
                         {typeof window !== "undefined" &&
                         window.location.hostname
                           ? window.location.hostname

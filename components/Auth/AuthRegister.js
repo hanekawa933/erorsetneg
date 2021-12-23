@@ -270,7 +270,6 @@ const AuthRegister = () => {
                       color={colorMode === "dark" ? "blue.300" : "blue.400"}
                       as="span"
                     >
-                      www.
                       {typeof window !== "undefined" && window.location.hostname
                         ? window.location.hostname
                         : ""}
@@ -288,7 +287,6 @@ const AuthRegister = () => {
                       color={colorMode === "dark" ? "blue.300" : "blue.400"}
                       as="span"
                     >
-                      www.
                       {typeof window !== "undefined" && window.location.hostname
                         ? window.location.hostname
                         : ""}
