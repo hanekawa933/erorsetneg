@@ -111,6 +111,8 @@ const AuthRegister = () => {
     isSubmitting,
     getFieldProps,
     handleBlur,
+    setFieldValue,
+    values,
   } = formik;
 
   return (
@@ -218,7 +220,10 @@ const AuthRegister = () => {
               <Box
                 cursor="pointer"
                 _hover={{ textDecoration: "underline" }}
-                onClick={() => onOpen()}
+                onClick={() => {
+                  setFieldValue("tna", !values.tna);
+                  onOpen();
+                }}
               >
                 Saya setuju dengan{" "}
                 <Box as="span" color="orange">
@@ -255,12 +260,38 @@ const AuthRegister = () => {
           <ModalCloseButton />
           <ModalBody>
             <OrderedList>
-              <ListItem>
+              <ListItem mt="3">
+                E-ROR adalah suatu app atau web portal{" "}
+                <Link href="/">
+                  <a>
+                    <Box color="blue.300" as="span">
+                      {typeof window !== "undefined" && window.location.hostname
+                        ? window.location.hostname
+                        : ""}
+                    </Box>
+                  </a>
+                </Link>
+                , yakni situs atau app terkait pelaporan kerusakan
+                sarana/prasarana. Selanjutnya disebut E-ROR.
+              </ListItem>
+              <ListItem mt="3">
+                Situs pelaporan kerusakan adalah{" "}
+                <Link href="/">
+                  <a>
+                    <Box color="blue.300" as="span">
+                      {typeof window !== "undefined" && window.location.hostname
+                        ? window.location.hostname
+                        : ""}
+                    </Box>
+                  </a>
+                </Link>
+              </ListItem>
+              <ListItem mt="3">
                 Pengguna dengan ini menyatakan bahwa pengguna adalah orang yang
                 cakap dan mampu untuk mengikatkan dirinya dalam sebuah
                 perjanjian yang sah menurut hukum.
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 E-ROR memiliki kewenangan untuk menutup akun Pengguna baik
                 sementara maupun permanen apabila didapati adanya tindakan
                 pelanggaran terhadap Syarat dan Ketentuan E-ROR . Pengguna
@@ -269,35 +300,35 @@ const AuthRegister = () => {
                 pembukaan akun yang baru apabila ditemukan kesamaan data yang
                 bermasalah sebelumnya.
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 E-ROR adalah suatu app atau web portal, yakni situs atau app
                 terkait pelaporan kerusakan sarana/prasarana. Selanjutnya
                 disebut E-ROR.
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 Syarat & ketentuan adalah perjanjian antara Pengguna dan E-ROR
                 yang berisikan seperangkat peraturan yang mengatur hak,
                 kewajiban, tanggung jawab pengguna dan E-ROR, serta tata cara
                 penggunaan sistem layanan E-ROR.
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 APP E-ROR tidak memungut biaya pendaftaran kepada Pengguna.
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 Pengguna mengerti untuk dan memahami atas pelaporan kerusakan
                 yang dikirimkan melalui APP/ website dan dapat
                 dipertanggungjawabkan
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 Pengguna mengirimkan lampiran foto atau video yang sesuai,
                 apabila ditemukan foto/video yang mengandung unsur SARA/tidak
                 senonoh, maka pengguna akan bertanggungjawab atas pelaporannya
                 dan diproses secara hukum yang berlaku.
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 Dilarang memodifikasi/mengedit/meretas situs/APP.
               </ListItem>
-              <ListItem>
+              <ListItem mt="3">
                 Proses pendaftaran mengisikan dengan data diri yang benar.
               </ListItem>
             </OrderedList>

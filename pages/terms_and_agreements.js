@@ -25,6 +25,7 @@ import { TempContext } from "../context/TempContext";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import instance from "../axios.default";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const TnA = () => {
   const { colorMode } = useColorMode();
@@ -232,7 +233,35 @@ const TnA = () => {
             </Heading>
             <Box mt="4">
               <OrderedList>
-                <ListItem>
+                <ListItem mt="3">
+                  E-ROR adalah suatu app atau web portal{" "}
+                  <Link href="/">
+                    <a>
+                      <Box color="blue.300" as="span">
+                        {typeof window !== "undefined" &&
+                        window.location.hostname
+                          ? window.location.hostname
+                          : ""}
+                      </Box>
+                    </a>
+                  </Link>
+                  , yakni situs atau app terkait pelaporan kerusakan
+                  sarana/prasarana. Selanjutnya disebut E-ROR.
+                </ListItem>
+                <ListItem mt="3">
+                  Situs pelaporan kerusakan adalah{" "}
+                  <Link href="/">
+                    <a>
+                      <Box color="blue.300" as="span">
+                        {typeof window !== "undefined" &&
+                        window.location.hostname
+                          ? window.location.hostname
+                          : ""}
+                      </Box>
+                    </a>
+                  </Link>
+                </ListItem>
+                <ListItem mt="3">
                   Pengguna dengan ini menyatakan bahwa pengguna adalah orang
                   yang cakap dan mampu untuk mengikatkan dirinya dalam sebuah
                   perjanjian yang sah menurut hukum.
