@@ -66,7 +66,7 @@ function Loading() {
               mt="5"
             />
             <Image
-              src="/assets/img/mandiri.png"
+              src="/assets/img/mandiri-dark.png"
               alt="MANDIRI LOGO"
               width={[32, 48]}
             />
