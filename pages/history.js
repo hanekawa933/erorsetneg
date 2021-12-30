@@ -575,7 +575,8 @@ function History() {
                       as={Button}
                       rightIcon={<ChevronDownIcon />}
                       colorScheme="orange"
-                      mx="3"
+                      mx="2"
+                      width="150px"
                     >
                       Kategori
                     </MenuButton>
@@ -632,6 +633,7 @@ function History() {
                       as={Button}
                       rightIcon={<ChevronDownIcon />}
                       colorScheme="blue"
+                      width="150px"
                     >
                       Status
                     </MenuButton>
@@ -641,12 +643,33 @@ function History() {
                   </Menu>
                 </TabList>
                 <Box display="flex" justifyContent="end" my="3">
-                  <Tag size="md" variant="subtle" colorScheme="orange" mx="2">
+                  <Tag
+                    size="md"
+                    variant="subtle"
+                    colorScheme="orange"
+                    mx="2"
+                    width="150px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    textAlign="center"
+                    py="2"
+                  >
                     {activeCategory.length < 1
                       ? "Semua"
                       : activeCategory[0].nama}
                   </Tag>
-                  <Tag size="md" variant="subtle" colorScheme={buttonStatus}>
+                  <Tag
+                    size="md"
+                    variant="subtle"
+                    colorScheme={buttonStatus}
+                    width="150px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    textAlign="center"
+                    py="2"
+                  >
                     {activeStatus[0].nama}
                   </Tag>
                 </Box>
