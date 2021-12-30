@@ -10,6 +10,7 @@ import {
   useColorMode,
   Text,
   Link,
+  Image,
 } from "@chakra-ui/react";
 import { SettingsIcon, SunIcon, MoonIcon, BellIcon } from "@chakra-ui/icons";
 import { Icon } from "@iconify/react";
@@ -163,6 +164,26 @@ const DashboardNavbar = () => {
       >
         <Icon icon="ci:list-ul" width={24} height={24} />
       </Button>
+      <Box
+        justifyContent="center"
+        alignItems="center"
+        display={["none", "none", "flex"]}
+      >
+        <Image
+          src="/assets/img/setneg.png"
+          alt="Kemensetneg Logo"
+          width="32"
+          height="100%"
+          mt="5"
+          mr="10"
+        />
+        <Image
+          src="/assets/img/mandiri.png"
+          alt="Mandiri Logo"
+          width="32"
+          height="100%"
+        />
+      </Box>
       <Box display="flex">
         {parseInt(settings.userLogin.role_id) === 1 ? (
           <Menu>

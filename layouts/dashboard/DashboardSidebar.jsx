@@ -279,6 +279,27 @@ const DashboardSidebar = () => {
         },
       }}
     >
+      <Box
+        justifyContent="space-between"
+        alignItems="center"
+        display={["flex", "flex", "none"]}
+        px="5"
+        pt="5"
+      >
+        <Image
+          src="/assets/img/setneg.png"
+          alt="Kemensetneg Logo"
+          width="20"
+          height="100%"
+          mt="3"
+        />
+        <Image
+          src="/assets/img/mandiri.png"
+          alt="Mandiri Logo"
+          width="20"
+          height="100%"
+        />
+      </Box>
       <Flex
         pt="5"
         px="5"
