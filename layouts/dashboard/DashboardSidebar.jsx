@@ -66,8 +66,8 @@ const DashboardSidebar = () => {
     settings && settings.userLogin && parseInt(settings.userLogin.current_exp);
 
   const nextLevel =
-    exp <= 100
-      ? 100
+    exp < 101
+      ? 101
       : exp >= 101 && exp <= 200
       ? 201
       : exp >= 201 && exp <= 400
@@ -81,8 +81,8 @@ const DashboardSidebar = () => {
       : 9999;
 
   const expNeeded =
-    exp <= 100
-      ? 100 - exp
+    exp < 101
+      ? 101 - exp
       : exp >= 101 && exp <= 200
       ? 201 - exp
       : exp >= 201 && exp <= 400
@@ -95,7 +95,7 @@ const DashboardSidebar = () => {
       ? 3201 - exp
       : "Kamu sudah berada pada level maksimal";
 
-  const currentPercentage = Math.round((exp / nextLevel) * 100);
+  const currentPercentage = Math.floor((exp / nextLevel) * 100);
 
   const modalExp = (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -167,7 +167,7 @@ const DashboardSidebar = () => {
                   <Box
                     as="object"
                     data={`/assets/svg/${
-                      expe <= 100
+                      expe < 101
                         ? "bronze"
                         : expe >= 101 && expe <= 200
                         ? "silver"

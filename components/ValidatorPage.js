@@ -73,7 +73,7 @@ function ValidatorPage() {
     }
 
     const queryUsed =
-      parseInt(userLogin.role_id) === 2 ? "admin_web" : "teknisi";
+      parseInt(userLogin.role_id) === 2 ? "admin_web" : "teknisi_web";
     fetchCategoryById(id);
     fetchReportByCategoryId(id, queryUsed);
   }, [router.isReady, loading]);
